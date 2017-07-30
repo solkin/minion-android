@@ -128,21 +128,22 @@ public class Minion {
             return this;
         }
 
-        public void sync(ResultCallback callback) {
+        public Minion sync() {
             this.async = false;
-            build(callback);
-
+            this.callback = new EmptyResultCallback();
+            return build();
         }
 
         public void async(ResultCallback callback) {
             this.async = true;
-            build(callback);
+            this.callback = callback;
+            build();
         }
 
-        private void build(ResultCallback callback) {
-            this.callback = callback;
+        private Minion build() {
             Minion minion = new Minion(readable, writable, async);
             minion.load(callback);
+            return minion;
         }
 
     }
