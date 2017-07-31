@@ -12,20 +12,20 @@ import java.util.List;
  */
 class IniGroup {
 
-    private final String name;
-    private final List<IniRecord> records;
+    private final @NonNull String name;
+    private final @NonNull List<IniRecord> records;
 
-    protected IniGroup(String name) {
+    protected IniGroup(@NonNull String name) {
         this.name = name;
         this.records = new ArrayList<>();
     }
 
-    protected IniGroup(String name, List<IniRecord> records) {
+    protected IniGroup(@NonNull String name, @NonNull List<IniRecord> records) {
         this.name = name;
         this.records = records;
     }
 
-    public String getName() {
+    public @NonNull String getName() {
         return name;
     }
 

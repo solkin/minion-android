@@ -2,17 +2,23 @@ package com.tomclaw.minion;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 
 import com.tomclaw.minion.storage.Readable;
 import com.tomclaw.minion.storage.Writable;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.util.LinkedHashMap;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
+
+import static com.tomclaw.minion.StreamHelper.safeClose;
 
 /**
  * Created by solkin on 27.07.17.
@@ -23,6 +29,7 @@ public class Minion {
     private static final String GROUP_START = "[";
     private static final String GROUP_END = "]";
     private static final String KEY_VALUE_DIVIDER = "=";
+    private static final String ARRAY_VALUE_DELIMITER = ",";
 
     private static Executor executor = Executors.newSingleThreadExecutor();
 
@@ -101,6 +108,56 @@ public class Minion {
         return group;
     }
 
+    public void store() {
+        store(new EmptyResultCallback());
+    }
+
+    public void store(@NonNull final ResultCallback callback) {
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                storeSync(callback);
+            }
+        };
+        if (async) {
+            executor.execute(runnable);
+        } else {
+            runnable.run();
+        }
+    }
+
+    private void storeSync(@NonNull final ResultCallback callback) {
+        try {
+            final OutputStream outputStream = writable.write();
+            compile(outputStream);
+            callback.onReady(this);
+        } catch (Exception ex) {
+            callback.onFailure(ex);
+        }
+    }
+
+    private void compile(OutputStream outputStream) throws IOException {
+        BufferedWriter writer = null;
+        try {
+            writer = new BufferedWriter(new OutputStreamWriter(outputStream));
+            boolean isEmpty = true;
+            for (IniGroup group : groups.values()) {
+                if (isEmpty) {
+                    writer.newLine();
+                    isEmpty = false;
+                }
+                writer.write(GROUP_START + group.getName() + GROUP_END);
+                for (IniRecord record : group.getRecords()) {
+                    String value = TextUtils.join(ARRAY_VALUE_DELIMITER, record.getValue());
+                    writer.newLine();
+                    writer.write(record.getKey() + KEY_VALUE_DIVIDER + value);
+                }
+            }
+        } finally {
+            safeClose(writer);
+        }
+    }
+
     private void load(@NonNull final ResultCallback callback) {
         Runnable runnable = new Runnable() {
             @Override
@@ -126,37 +183,41 @@ public class Minion {
     }
 
     private void parse(@NonNull InputStream inputStream) throws IOException, UnsupportedFormatException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-        String line;
-        IniGroup lastGroup = null;
-        while ((line = reader.readLine()) != null) {
-            line = line.trim();
-            if (line.startsWith(COMMENT_START)) {
-                continue;
-            }
-
-            if (line.startsWith(GROUP_START) && line.endsWith(GROUP_END)) {
-                String name = line.substring(1, line.length() - 1);
-                IniGroup group = new IniGroup(name);
-                groups.put(name, group);
-                lastGroup = group;
-                continue;
-            }
-
-            if (line.contains(KEY_VALUE_DIVIDER) && lastGroup != null) {
-                int index = line.indexOf(KEY_VALUE_DIVIDER);
-                if (index <= 0) {
-                    throw new UnsupportedFormatException();
+        BufferedReader reader = null;
+        try {
+            reader = new BufferedReader(new InputStreamReader(inputStream));
+            String line;
+            IniGroup lastGroup = null;
+            while ((line = reader.readLine()) != null) {
+                line = line.trim();
+                if (line.startsWith(COMMENT_START)) {
+                    continue;
                 }
-                String key = line.substring(0, index);
-                String value = line.substring(index + 1);
 
-                String[] arrayValue = value.split(",");
+                if (line.startsWith(GROUP_START) && line.endsWith(GROUP_END)) {
+                    String name = line.substring(1, line.length() - 1);
+                    IniGroup group = new IniGroup(name);
+                    groups.put(name, group);
+                    lastGroup = group;
+                    continue;
+                }
 
-                lastGroup.getOrCreateRecord(key, arrayValue);
+                if (line.contains(KEY_VALUE_DIVIDER) && lastGroup != null) {
+                    int index = line.indexOf(KEY_VALUE_DIVIDER);
+                    if (index <= 0) {
+                        throw new UnsupportedFormatException();
+                    }
+                    String key = line.substring(0, index);
+                    String value = line.substring(index + 1);
+
+                    String[] arrayValue = value.split(ARRAY_VALUE_DELIMITER);
+
+                    lastGroup.getOrCreateRecord(key, arrayValue);
+                }
             }
+        } finally {
+            safeClose(reader);
         }
-        reader.close();
     }
 
     public static Builder lets() {

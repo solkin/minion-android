@@ -2,11 +2,13 @@ package com.tomclaw.minion.demo;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.tomclaw.minion.Minion;
 import com.tomclaw.minion.ResultCallback;
 import com.tomclaw.minion.storage.MemoryStorage;
 import com.tomclaw.minion.storage.StringStorage;
+import com.tomclaw.minion.storage.Writable;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,11 +37,14 @@ public class MainActivity extends AppCompatActivity {
         Minion minion = Minion.lets()
                 .load(StringStorage.create("[group]\nkey=value\nkey2=value2"))
                 .sync();
-        minion.setValue("settings", "lang", "ru,en");
 
+        Writable storage = MemoryStorage.create();
         Minion.lets()
-                .store(MemoryStorage.create())
+                .store(storage)
                 .sync();
+        minion.setValue("settings", "lang", "ru,en");
+        minion.store();
+        Log.d("~@~", storage.toString());
 //
 //        MemoryStorage memoryStorage = MemoryStorage.create();
 //        Minion.lets()
