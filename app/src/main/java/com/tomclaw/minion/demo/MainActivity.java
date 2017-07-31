@@ -32,13 +32,14 @@ public class MainActivity extends AppCompatActivity {
                 .load(StringStorage.create("[group]\nkey=value\nkey2=value2"))
                 .async(callback);
 
-        Minion.lets()
+        Minion minion = Minion.lets()
                 .load(StringStorage.create("[group]\nkey=value\nkey2=value2"))
                 .sync();
+        minion.setValue("settings", "lang", "ru,en");
 
-//        Minion.lets()
-//                .store(MemoryStorage.create())
-//                .sync(callback);
+        Minion.lets()
+                .store(MemoryStorage.create())
+                .sync();
 //
 //        MemoryStorage memoryStorage = MemoryStorage.create();
 //        Minion.lets()

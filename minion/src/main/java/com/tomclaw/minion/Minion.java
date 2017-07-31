@@ -40,11 +40,39 @@ public class Minion {
 
     public
     @Nullable
-    IniRecord addRecord(@NonNull String name,
-                        @NonNull String key,
-                        @NonNull String... value) {
+    IniRecord setValue(@NonNull String name,
+                       @NonNull String key,
+                       @NonNull String... value) {
         IniGroup group = getOrCreateGroup(name);
         return group.getOrCreateRecord(key, value);
+    }
+
+    public
+    @Nullable
+    String getValue(@NonNull String name,
+                      @NonNull String key) {
+        String value = null;
+        IniGroup group = getOrCreateGroup(name);
+        IniRecord record = group.getRecord(key);
+        if (record != null) {
+            if (record.isArrayValue()) {
+                value = record.getValue()[0];
+            }
+        }
+        return value;
+    }
+
+    public
+    @Nullable
+    String[] getArrayValue(@NonNull String name,
+                           @NonNull String key) {
+        String[] value = null;
+        IniGroup group = getOrCreateGroup(name);
+        IniRecord record = group.getRecord(key);
+        if (record != null) {
+            value = record.getValue();
+        }
+        return value;
     }
 
     public
@@ -123,7 +151,9 @@ public class Minion {
                 String key = line.substring(0, index);
                 String value = line.substring(index + 1);
 
-                lastGroup.getOrCreateRecord(key, value);
+                String[] arrayValue = value.split(",");
+
+                lastGroup.getOrCreateRecord(key, arrayValue);
             }
         }
         reader.close();
