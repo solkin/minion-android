@@ -6,9 +6,9 @@ package com.tomclaw.minion;
 class IniRecord {
 
     private final String key;
-    private String value;
+    private String[] value;
 
-    protected IniRecord(String key, String value) {
+    protected IniRecord(String key, String... value) {
         this.key = key;
         this.value = value;
     }
@@ -17,7 +17,7 @@ class IniRecord {
         return key;
     }
 
-    public String getValue() {
+    public String[] getValue() {
         return value;
     }
 }

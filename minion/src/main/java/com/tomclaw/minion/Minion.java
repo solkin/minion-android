@@ -1,5 +1,8 @@
 package com.tomclaw.minion;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 import com.tomclaw.minion.storage.Readable;
 import com.tomclaw.minion.storage.Writable;
 
@@ -7,16 +10,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.IllegalFormatException;
-import java.util.List;
+import java.util.LinkedHashMap;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
-
-import static android.R.attr.data;
-import static android.R.attr.lines;
 
 /**
  * Created by solkin on 27.07.17.
@@ -34,7 +30,7 @@ public class Minion {
     private final Writable writable;
     private final boolean async;
 
-    private final List<IniGroup> groups = new ArrayList<>();
+    private final LinkedHashMap<String, IniGroup> groups = new LinkedHashMap<>();
 
     private Minion(Readable readable, Writable writable, boolean async) {
         this.readable = readable;
@@ -42,7 +38,42 @@ public class Minion {
         this.async = async;
     }
 
-    private void load(final ResultCallback callback) {
+    public
+    @Nullable
+    IniRecord addRecord(@NonNull String name,
+                        @NonNull String key,
+                        @NonNull String... value) {
+        IniGroup group = getOrCreateGroup(name);
+        return group.getOrCreateRecord(key, value);
+    }
+
+    public
+    @NonNull
+    IniGroup getOrCreateGroup(@NonNull String name) {
+        synchronized (groups) {
+            IniGroup group = getGroup(name);
+            if (group == null) {
+                group = addGroup(name);
+            }
+            return group;
+        }
+    }
+
+    public
+    @Nullable
+    IniGroup getGroup(@NonNull String name) {
+        return groups.get(name);
+    }
+
+    private
+    @NonNull
+    IniGroup addGroup(String name) {
+        IniGroup group = new IniGroup(name);
+        groups.put(name, group);
+        return group;
+    }
+
+    private void load(@NonNull final ResultCallback callback) {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
@@ -56,7 +87,7 @@ public class Minion {
         }
     }
 
-    private void loadSync(ResultCallback callback) {
+    private void loadSync(@NonNull ResultCallback callback) {
         try {
             final InputStream inputStream = readable.read();
             parse(inputStream);
@@ -66,7 +97,7 @@ public class Minion {
         }
     }
 
-    private void parse(InputStream inputStream) throws IOException, UnsupportedFormatException {
+    private void parse(@NonNull InputStream inputStream) throws IOException, UnsupportedFormatException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         String line;
         IniGroup lastGroup = null;
@@ -79,7 +110,7 @@ public class Minion {
             if (line.startsWith(GROUP_START) && line.endsWith(GROUP_END)) {
                 String name = line.substring(1, line.length() - 1);
                 IniGroup group = new IniGroup(name);
-                groups.add(group);
+                groups.put(name, group);
                 lastGroup = group;
                 continue;
             }
@@ -92,8 +123,7 @@ public class Minion {
                 String key = line.substring(0, index);
                 String value = line.substring(index + 1);
 
-                IniRecord record = new IniRecord(key, value);
-                lastGroup.addRecord(record);
+                lastGroup.getOrCreateRecord(key, value);
             }
         }
         reader.close();
@@ -113,12 +143,12 @@ public class Minion {
         private Builder() {
         }
 
-        public Builder load(Readable readable) {
+        public Builder load(@NonNull Readable readable) {
             this.readable = readable;
             return this;
         }
 
-        public Builder store(Writable writable) {
+        public Builder store(@NonNull Writable writable) {
             this.writable = writable;
             return this;
         }
@@ -134,7 +164,7 @@ public class Minion {
             return build();
         }
 
-        public void async(ResultCallback callback) {
+        public void async(@NonNull ResultCallback callback) {
             this.async = true;
             this.callback = callback;
             build();
