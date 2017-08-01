@@ -12,12 +12,15 @@ import java.util.List;
  */
 class IniGroup {
 
-    private final @NonNull String name;
-    private final @NonNull List<IniRecord> records;
+    private final
+    @NonNull
+    String name;
+    private final
+    @NonNull
+    List<IniRecord> records;
 
     protected IniGroup(@NonNull String name) {
-        this.name = name;
-        this.records = new ArrayList<>();
+        this(name, new ArrayList<IniRecord>());
     }
 
     protected IniGroup(@NonNull String name, @NonNull List<IniRecord> records) {
@@ -25,7 +28,9 @@ class IniGroup {
         this.records = records;
     }
 
-    public @NonNull String getName() {
+    public
+    @NonNull
+    String getName() {
         return name;
     }
 

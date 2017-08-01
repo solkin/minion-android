@@ -2,7 +2,6 @@ package com.tomclaw.minion;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 
 import com.tomclaw.minion.storage.Readable;
 import com.tomclaw.minion.storage.Writable;
@@ -58,7 +57,7 @@ public class Minion {
     public
     @Nullable
     String getValue(@NonNull String name,
-                      @NonNull String key) {
+                    @NonNull String key) {
         String value = null;
         IniGroup group = getOrCreateGroup(name);
         IniRecord record = group.getRecord(key);

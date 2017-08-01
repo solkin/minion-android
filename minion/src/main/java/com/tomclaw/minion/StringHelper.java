@@ -8,7 +8,7 @@ public class StringHelper {
     public static String join(String delimiter, String[] tokens) {
         StringBuilder sb = new StringBuilder();
         boolean firstTime = true;
-        for (Object token: tokens) {
+        for (Object token : tokens) {
             if (firstTime) {
                 firstTime = false;
             } else {
