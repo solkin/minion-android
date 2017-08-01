@@ -19,6 +19,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 import static com.tomclaw.minion.StreamHelper.safeClose;
+import static com.tomclaw.minion.StringHelper.join;
 
 /**
  * Created by solkin on 27.07.17.
@@ -142,17 +143,18 @@ public class Minion {
             writer = new BufferedWriter(new OutputStreamWriter(outputStream));
             boolean isEmpty = true;
             for (IniGroup group : groups.values()) {
-                if (isEmpty) {
+                if (!isEmpty) {
                     writer.newLine();
-                    isEmpty = false;
                 }
                 writer.write(GROUP_START + group.getName() + GROUP_END);
+                isEmpty = false;
                 for (IniRecord record : group.getRecords()) {
-                    String value = TextUtils.join(ARRAY_VALUE_DELIMITER, record.getValue());
+                    String value = join(ARRAY_VALUE_DELIMITER, record.getValue());
                     writer.newLine();
                     writer.write(record.getKey() + KEY_VALUE_DIVIDER + value);
                 }
             }
+            writer.flush();
         } finally {
             safeClose(writer);
         }
