@@ -1,42 +1,33 @@
 package com.tomclaw.minion;
 
-import com.tomclaw.minion.storage.MemoryStorage;
 import com.tomclaw.minion.storage.Readable;
+import com.tomclaw.minion.storage.StringStorage;
 
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 
-import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by solkin on 01.08.17.
  */
-public class MemoryStorageUnitTest {
+public class StringStorageUnitTest {
 
     @Test
-    public void readAfterWrite_dataEquals() throws Exception {
-        byte[] writeData = createRandomData();
-        MemoryStorage storage = createMemoryStorage();
-        OutputStream output = storage.write();
+    public void read_dataEquals() throws Exception {
+        String data = "sample data";
+        StringStorage storage = createStringStorage(data);
 
-        output.write(writeData);
-        output.close();
+        String read = new String(readFully(storage), "UTF-8");
 
-        byte[] readData = readFully(storage);
-
-        assertArrayEquals(writeData, readData);
+        assertEquals(data, read);
     }
 
-    private byte[] createRandomData() {
-        return "sample data".getBytes();
-    }
-
-    private MemoryStorage createMemoryStorage() {
-        return MemoryStorage.create();
+    private StringStorage createStringStorage(String data) {
+        return StringStorage.create(data);
     }
 
     private byte[] readFully(Readable readable) throws IOException {
