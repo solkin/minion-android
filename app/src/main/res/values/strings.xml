@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Minion Demo</string>
+    <string name="benchmark">Benchmark</string>
 </resources>
