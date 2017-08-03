@@ -8,6 +8,8 @@ import android.support.annotation.NonNull;
  */
 public class SectionItem {
 
+    private int id;
+
     @DrawableRes
     private int icon;
 
@@ -17,10 +19,16 @@ public class SectionItem {
     @NonNull
     private String description;
 
-    public SectionItem(int icon, @NonNull String text, @NonNull String description) {
+    public SectionItem(int id, @DrawableRes int icon, @NonNull String text,
+                       @NonNull String description) {
+        this.id = id;
         this.icon = icon;
         this.text = text;
         this.description = description;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public int getIcon() {
