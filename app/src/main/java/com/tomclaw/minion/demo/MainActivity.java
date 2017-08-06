@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import com.tomclaw.minion.demo.adapters.OnItemClickListener;
 import com.tomclaw.minion.demo.adapters.SectionItem;
 import com.tomclaw.minion.demo.adapters.SectionsRecyclerAdapter;
+import com.tomclaw.minion.demo.benchmark.BenchmarkActivity;
 
 import java.util.Arrays;
 

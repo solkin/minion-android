@@ -6,4 +6,10 @@
     <string name="benchmark_description">Benchmark will check Minion working speed</string>
     <string name="parse_description">Parsing INI formatted data</string>
     <string name="compile_description">Compile values to INI format</string>
+    <string name="benchmark_groups_creation">Groups creation</string>
+    <string name="benchmark_items_creation">Items creation</string>
+    <string name="benchmark_groups_access">Groups access</string>
+    <string name="benchmark_items_access">Items access</string>
+    <string name="benchmark_compilation">Compilation</string>
+    <string name="benchmark_parsing">Parsing</string>
 </resources>
