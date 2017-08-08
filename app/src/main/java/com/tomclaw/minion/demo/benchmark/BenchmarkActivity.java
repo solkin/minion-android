@@ -9,14 +9,20 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.tomclaw.minion.Minion;
 import com.tomclaw.minion.demo.R;
-
-import java.util.Arrays;
+import com.tomclaw.minion.demo.utils.Task;
+import com.tomclaw.minion.demo.utils.TaskExecutor;
+import com.tomclaw.minion.storage.MemoryStorage;
+import com.tomclaw.minion.storage.Writable;
 
 /**
  * Created by solkin on 01.08.17.
  */
-public class BenchmarkActivity extends AppCompatActivity {
+public class BenchmarkActivity extends AppCompatActivity implements BenchmarkTask.BenchmarkCallback {
+
+    private BenchmarkRecyclerAdapter adapter;
+    private Minion minion;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,20 +38,29 @@ public class BenchmarkActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        BenchmarkRecyclerAdapter adapter = new BenchmarkRecyclerAdapter(this);
+        adapter = new BenchmarkRecyclerAdapter(this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,
                 LinearLayoutManager.VERTICAL, false);
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
-        adapter.setItems(Arrays.asList(
-                new BenchmarkItem(1, R.string.benchmark_groups_creation, 100, "1028 ops/sec"),
-                new BenchmarkItem(2, R.string.benchmark_items_creation, 30, ""),
-                new BenchmarkItem(3, R.string.benchmark_groups_access, 0, ""),
-                new BenchmarkItem(4, R.string.benchmark_items_access, 0, "")
-                )
-        );
+        prepareMinion();
+        startBenchmark();
+    }
+
+    private void prepareMinion() {
+        Writable writable = MemoryStorage.create();
+        minion = Minion
+                .lets()
+                .store(writable)
+                .sync();
+    }
+
+    private void startBenchmark() {
+        TaskExecutor
+                .getInstance()
+                .execute(new GroupCreationBenchmarkTask(minion, adapter, this));
     }
 
     @Override
@@ -56,5 +71,16 @@ public class BenchmarkActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onComplete(int id) {
+        switch (id) {
+            case 0x01:
+                TaskExecutor
+                        .getInstance()
+                        .execute(new ItemsCreationBenchmarkTask(minion, adapter, this));
+                break;
+        }
     }
 }

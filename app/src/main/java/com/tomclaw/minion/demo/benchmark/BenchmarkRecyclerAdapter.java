@@ -22,10 +22,12 @@ public class BenchmarkRecyclerAdapter extends RecyclerView.Adapter<BenchmarkItem
     public BenchmarkRecyclerAdapter(Context context) {
         this.context = context;
         this.list = new ArrayList<>();
+        setHasStableIds(true);
     }
 
-    public void appendItem(BenchmarkItem item) {
+    public int appendItem(BenchmarkItem item) {
         list.add(item);
+        return list.size() - 1;
     }
 
     public void setItems(List<BenchmarkItem> items) {
@@ -48,5 +50,10 @@ public class BenchmarkRecyclerAdapter extends RecyclerView.Adapter<BenchmarkItem
     @Override
     public int getItemCount() {
         return list.size();
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return list.get(position).getId();
     }
 }

@@ -42,4 +42,12 @@ public class BenchmarkItem {
     String getResult() {
         return result;
     }
+
+    public void setProgress(int progress) {
+        this.progress = progress;
+    }
+
+    public void setResult(@NonNull String result) {
+        this.result = result;
+    }
 }
