@@ -11,7 +11,6 @@ import android.view.MenuItem;
 
 import com.tomclaw.minion.Minion;
 import com.tomclaw.minion.demo.R;
-import com.tomclaw.minion.demo.utils.Task;
 import com.tomclaw.minion.demo.utils.TaskExecutor;
 import com.tomclaw.minion.storage.MemoryStorage;
 import com.tomclaw.minion.storage.Writable;

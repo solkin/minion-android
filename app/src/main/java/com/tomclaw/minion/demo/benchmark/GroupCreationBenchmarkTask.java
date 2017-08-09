@@ -5,8 +5,6 @@ import android.support.annotation.NonNull;
 import com.tomclaw.minion.Minion;
 import com.tomclaw.minion.demo.R;
 
-import java.util.concurrent.TimeUnit;
-
 import static com.tomclaw.minion.demo.utils.StringUtil.generateRandomString;
 
 /**
@@ -28,6 +26,11 @@ public class GroupCreationBenchmarkTask extends BenchmarkTask {
     @Override
     protected int getTitle() {
         return R.string.benchmark_groups_creation;
+    }
+
+    @Override
+    protected int getTestsCount() {
+        return 100000;
     }
 
     @Override

@@ -15,7 +15,6 @@ import java.util.concurrent.TimeUnit;
 public abstract class BenchmarkTask extends Task {
 
     private static final long DEBOUNCE_DELAY = 500;
-    private static final int TESTS_COUNT = 10000;
     private
     @NonNull
     BenchmarkItem benchmarkItem;
@@ -67,19 +66,22 @@ public abstract class BenchmarkTask extends Task {
     @StringRes
     int getTitle();
 
+    protected abstract int getTestsCount();
+
     @Override
     public final void executeBackground() throws Throwable {
         Minion minion = getMinion();
         beforeTest(minion);
+        int count = getTestsCount();
         long time = System.currentTimeMillis();
-        for (int c = 0; c < TESTS_COUNT; c++) {
+        for (int c = 0; c < count; c++) {
             runTest(minion);
-            setProgress(100 * c / TESTS_COUNT);
+            setProgress(100 * c / count);
             updateItem();
         }
         time -= System.currentTimeMillis();
         time *= -1;
-        setResult((TESTS_COUNT * TimeUnit.SECONDS.toMillis(1) / time) + " ops/sec");
+        setResult((count * TimeUnit.SECONDS.toMillis(1) / time) + " ops/sec");
     }
 
     protected abstract void beforeTest(Minion minion);

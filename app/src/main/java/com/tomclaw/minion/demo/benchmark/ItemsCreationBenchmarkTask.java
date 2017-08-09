@@ -5,8 +5,6 @@ import android.support.annotation.NonNull;
 import com.tomclaw.minion.Minion;
 import com.tomclaw.minion.demo.R;
 
-import java.util.concurrent.TimeUnit;
-
 import static com.tomclaw.minion.demo.utils.StringUtil.generateRandomString;
 
 /**
@@ -30,6 +28,11 @@ public class ItemsCreationBenchmarkTask extends BenchmarkTask {
     @Override
     protected int getTitle() {
         return R.string.benchmark_items_creation;
+    }
+
+    @Override
+    protected int getTestsCount() {
+        return 10000;
     }
 
     @Override
