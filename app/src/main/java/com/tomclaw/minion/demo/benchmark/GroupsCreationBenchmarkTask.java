@@ -10,11 +10,11 @@ import static com.tomclaw.minion.demo.utils.StringUtil.generateRandomString;
 /**
  * Created by solkin on 09.08.17.
  */
-public class GroupCreationBenchmarkTask extends BenchmarkTask {
+public class GroupsCreationBenchmarkTask extends BenchmarkTask {
 
-    public GroupCreationBenchmarkTask(@NonNull Minion minion,
-                                      @NonNull BenchmarkRecyclerAdapter adapter,
-                                      @NonNull BenchmarkCallback callback) {
+    public GroupsCreationBenchmarkTask(@NonNull Minion minion,
+                                       @NonNull BenchmarkRecyclerAdapter adapter,
+                                       @NonNull BenchmarkCallback callback) {
         super(minion, adapter, callback);
     }
 

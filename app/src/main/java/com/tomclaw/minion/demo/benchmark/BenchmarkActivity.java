@@ -11,6 +11,7 @@ import android.view.MenuItem;
 
 import com.tomclaw.minion.Minion;
 import com.tomclaw.minion.demo.R;
+import com.tomclaw.minion.demo.utils.Task;
 import com.tomclaw.minion.demo.utils.TaskExecutor;
 import com.tomclaw.minion.storage.MemoryStorage;
 import com.tomclaw.minion.storage.Writable;
@@ -48,18 +49,8 @@ public class BenchmarkActivity extends AppCompatActivity implements BenchmarkTas
         startBenchmark();
     }
 
-    private void prepareMinion() {
-        Writable writable = MemoryStorage.create();
-        minion = Minion
-                .lets()
-                .store(writable)
-                .sync();
-    }
-
     private void startBenchmark() {
-        TaskExecutor
-                .getInstance()
-                .execute(new GroupCreationBenchmarkTask(minion, adapter, this));
+        onComplete(0x00);
     }
 
     @Override
@@ -72,14 +63,33 @@ public class BenchmarkActivity extends AppCompatActivity implements BenchmarkTas
         return super.onOptionsItemSelected(item);
     }
 
+    private void prepareMinion() {
+        Writable writable = MemoryStorage.create();
+        minion = Minion
+                .lets()
+                .store(writable)
+                .sync();
+    }
+
     @Override
     public void onComplete(int id) {
+        prepareMinion();
+        Task task;
         switch (id) {
-            case 0x01:
-                TaskExecutor
-                        .getInstance()
-                        .execute(new ItemsCreationBenchmarkTask(minion, adapter, this));
+            case 0x00:
+                task = new GroupsCreationBenchmarkTask(minion, adapter, this);
                 break;
+            case 0x01:
+                task = new ItemsCreationBenchmarkTask(minion, adapter, this);
+                break;
+            case 0x02:
+                task = new GroupsAccessBenchmarkTask(minion, adapter, this);
+                break;
+            default:
+                return;
         }
+        TaskExecutor
+                .getInstance()
+                .execute(task);
     }
 }
