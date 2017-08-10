@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 /**
  * Created by solkin on 28.07.17.
  */
-class IniRecord {
+public class IniRecord {
 
     private
     @NonNull

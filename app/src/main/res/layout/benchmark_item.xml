@@ -37,7 +37,10 @@
         android:id="@+id/progress"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="match_parent"
-        android:layout_height="6dp"
+        android:layout_height="1dp"
+        android:indeterminateOnly="false"
+        android:minHeight="1dp"
+        android:maxHeight="1dp"
         tools:progress="30" />
 
 </LinearLayout>

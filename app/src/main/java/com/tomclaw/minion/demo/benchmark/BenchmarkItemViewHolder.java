@@ -27,7 +27,13 @@ class BenchmarkItemViewHolder extends RecyclerView.ViewHolder {
 
     public void bind(final BenchmarkItem item) {
         title.setText(item.getTitle());
-        progress.setProgress(item.getProgress());
+        int value = item.getProgress();
+        if (value == 0) {
+            progress.setIndeterminate(true);
+        } else {
+            progress.setIndeterminate(false);
+            progress.setProgress(value);
+        }
         result.setText(item.getResult());
     }
 }

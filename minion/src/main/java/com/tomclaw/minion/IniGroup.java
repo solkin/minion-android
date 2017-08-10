@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by solkin on 28.07.17.
  */
-class IniGroup {
+public class IniGroup {
 
     private final
     @NonNull

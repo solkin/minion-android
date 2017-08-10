@@ -85,6 +85,9 @@ public class BenchmarkActivity extends AppCompatActivity implements BenchmarkTas
             case 0x02:
                 task = new GroupsAccessBenchmarkTask(minion, adapter, this);
                 break;
+            case 0x03:
+                task = new ItemsAccessBenchmarkTask(minion, adapter, this);
+                break;
             default:
                 return;
         }
