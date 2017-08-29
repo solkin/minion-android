@@ -26,18 +26,19 @@ class BenchmarkItemViewHolder extends RecyclerView.ViewHolder {
         this.title = (TextView) itemView.findViewById(R.id.title);
         this.progress = (MaterialProgressBar) itemView.findViewById(R.id.progress);
         this.result = (TextView) itemView.findViewById(R.id.result);
+
+        Drawable drawable = new IndeterminateHorizontalProgressDrawable(itemView.getContext());
+        progress.setIndeterminateDrawable(drawable);
     }
 
     public void bind(final BenchmarkItem item) {
         title.setText(item.getTitle());
         int value = item.getProgress();
-        if (value == 0) {
-            progress.setIndeterminate(true);
-            Drawable drawable = new IndeterminateHorizontalProgressDrawable(itemView.getContext());
-            progress.setIndeterminateDrawable(drawable);
-        } else {
+        if (value > 0) {
             progress.setIndeterminate(false);
             progress.setProgress(value);
+        } else {
+            progress.setIndeterminate(true);
         }
         result.setText(item.getResult());
     }
