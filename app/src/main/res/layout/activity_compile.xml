@@ -7,17 +7,10 @@
 
     <include layout="@layout/toolbar" />
 
-    <EditText
-        android:id="@+id/input"
+    <View
+        android:id="@+id/stub"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize"
-        android:background="@android:color/transparent"
-        android:fontFamily="monospace"
-        android:gravity="top"
-        android:inputType="textMultiLine|textNoSuggestions|textImeMultiLine"
-        android:padding="8dp"
-        android:textSize="12sp"
-        android:textStyle="normal" />
+        android:layout_marginTop="?attr/actionBarSize" />
 
 </FrameLayout>

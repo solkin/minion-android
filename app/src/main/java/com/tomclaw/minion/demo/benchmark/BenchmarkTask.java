@@ -30,7 +30,9 @@ public abstract class BenchmarkTask extends Task {
     private
     AdapterUpdater adapterUpdater;
 
-    public BenchmarkTask(@NonNull Minion minion, @NonNull BenchmarkRecyclerAdapter adapter, @NonNull BenchmarkCallback callback) {
+    public BenchmarkTask(@NonNull Minion minion,
+                         @NonNull BenchmarkRecyclerAdapter adapter,
+                         @NonNull BenchmarkCallback callback) {
         this.minion = minion;
         this.adapter = adapter;
         this.callback = callback;

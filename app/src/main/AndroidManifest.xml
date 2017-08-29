@@ -16,7 +16,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".benchmark.BenchmarkActivity" />
-        <activity android:name=".parse.ParseActivity" android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".parse.ParseActivity"
+            android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".compile.CompileActivity" />
     </application>
 
 </manifest>

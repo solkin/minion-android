@@ -42,7 +42,7 @@ public class ParseActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        input = (EditText) findViewById(R.id.ini_input);
+        input = (EditText) findViewById(R.id.input);
 
         loadExample();
     }
