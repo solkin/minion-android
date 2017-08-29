@@ -23,8 +23,8 @@ public class MinionUnitTest {
     @Test
     public void loadDataSync_isCorrect() {
         String data = "[first_group]\nfirst_key=first_value\n[second_group]\n" +
-                "#comment\n" +
-                "second_key=second_value\narray_key=value1,value2,value3";
+                "#comment\n;comment\n" +
+                "second_key=second_value\narray_key=value1 , value2 , value3";
         Minion minion = Minion.lets()
                 .load(StringStorage.create(data))
                 .sync();
@@ -42,9 +42,9 @@ public class MinionUnitTest {
                 .store(storage)
                 .sync();
 
-        minion.setValue("first_group", "first_key", "first_value");
-        minion.setValue("second_group", "second_key", "second_value");
-        minion.setValue("second_group", "array_key", "value1", "value2", "value3");
+        minion.setValue("first_group", "first_key ", "first_value");
+        minion.setValue("second_group", " second_key", "second_value");
+        minion.setValue("second_group", " array_key ", "value1 ", " value2 ", " value3");
         minion.store();
 
         String data = new String(readFully(storage), "UTF-8");

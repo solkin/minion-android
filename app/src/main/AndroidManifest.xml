@@ -16,6 +16,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".benchmark.BenchmarkActivity" />
+        <activity android:name=".parse.ParseActivity" android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>

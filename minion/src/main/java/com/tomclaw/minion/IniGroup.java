@@ -25,7 +25,7 @@ public class IniGroup {
     }
 
     protected IniGroup(@NonNull String name, @NonNull Map<String, IniRecord> records) {
-        this.name = name;
+        this.name = name.trim();
         this.records = records;
     }
 
@@ -38,6 +38,7 @@ public class IniGroup {
     public
     @NonNull
     IniRecord getOrCreateRecord(String key, String... value) {
+        key = key.trim();
         synchronized (records) {
             IniRecord record = getRecord(key);
             if (record == null) {
@@ -61,7 +62,7 @@ public class IniGroup {
     @NonNull
     IniRecord addRecord(String key, String... value) {
         IniRecord record = new IniRecord(key, value);
-        records.put(key, record);
+        records.put(record.getKey(), record);
         return record;
     }
 }

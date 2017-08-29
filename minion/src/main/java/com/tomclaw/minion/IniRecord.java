@@ -15,8 +15,9 @@ public class IniRecord {
     String[] value;
 
     protected IniRecord(@NonNull String key, @NonNull String... value) {
-        this.key = key;
+        this.key = key.trim();
         this.value = value;
+        trimValues();
     }
 
     public
@@ -33,5 +34,11 @@ public class IniRecord {
 
     public boolean isArrayValue() {
         return value.length > 0;
+    }
+
+    private void trimValues() {
+        for (int c = 0;c< value.length;c++) {
+            value[c] = value[c].trim();
+        }
     }
 }

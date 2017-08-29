@@ -12,4 +12,8 @@
     <string name="benchmark_items_access">Items access</string>
     <string name="benchmark_compilation">Compilation</string>
     <string name="benchmark_parsing">Parsing</string>
+    <string name="parse_action">Parse</string>
+    <string name="please_wait">Please, wait…</string>
+    <string name="parsing_result">Parsed in %1$d ms\nRead %2$d groups and %3$d records.</string>
+    <string name="ok">OK</string>
 </resources>

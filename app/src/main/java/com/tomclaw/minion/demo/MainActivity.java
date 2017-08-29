@@ -11,6 +11,8 @@ import com.tomclaw.minion.demo.adapters.OnItemClickListener;
 import com.tomclaw.minion.demo.adapters.SectionItem;
 import com.tomclaw.minion.demo.adapters.SectionsRecyclerAdapter;
 import com.tomclaw.minion.demo.benchmark.BenchmarkActivity;
+import com.tomclaw.minion.demo.compile.CompileActivity;
+import com.tomclaw.minion.demo.parse.ParseActivity;
 
 import java.util.Arrays;
 

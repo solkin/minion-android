@@ -13,7 +13,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.util.Collections;
 import java.util.LinkedHashMap;
+import java.util.Set;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -25,7 +27,8 @@ import static com.tomclaw.minion.StringHelper.join;
  */
 public class Minion {
 
-    private static final String COMMENT_START = "#";
+    private static final String COMMENT_START_UNIX = "#";
+    private static final String COMMENT_START_WINDOWS = ";";
     private static final String GROUP_START = "[";
     private static final String GROUP_END = "]";
     private static final String KEY_VALUE_DIVIDER = "=";
@@ -100,11 +103,17 @@ public class Minion {
         return groups.get(name);
     }
 
+    public
+    @NonNull
+    Set<String> getGroupNames() {
+        return Collections.unmodifiableSet(groups.keySet());
+    }
+
     private
     @NonNull
     IniGroup addGroup(String name) {
         IniGroup group = new IniGroup(name);
-        groups.put(name, group);
+        groups.put(group.getName(), group);
         return group;
     }
 
@@ -191,15 +200,13 @@ public class Minion {
             IniGroup lastGroup = null;
             while ((line = reader.readLine()) != null) {
                 line = line.trim();
-                if (line.startsWith(COMMENT_START)) {
+                if (line.startsWith(COMMENT_START_UNIX) || line.startsWith(COMMENT_START_WINDOWS)) {
                     continue;
                 }
 
                 if (line.startsWith(GROUP_START) && line.endsWith(GROUP_END)) {
                     String name = line.substring(1, line.length() - 1);
-                    IniGroup group = new IniGroup(name);
-                    groups.put(name, group);
-                    lastGroup = group;
+                    lastGroup = addGroup(name);
                     continue;
                 }
 
@@ -208,7 +215,7 @@ public class Minion {
                     if (index <= 0) {
                         throw new UnsupportedFormatException();
                     }
-                    String key = line.substring(0, index);
+                    String key = line.substring(0, index).trim();
                     String value = line.substring(index + 1);
 
                     String[] arrayValue = value.split(ARRAY_VALUE_DELIMITER);

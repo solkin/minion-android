@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar" />
+
+    <EditText
+        android:id="@+id/ini_input"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:background="@android:color/transparent"
+        android:gravity="top"
+        android:inputType="textMultiLine|textNoSuggestions|textImeMultiLine"
+        android:padding="8dp"
+        android:textSize="12sp"
+        android:textStyle="normal"
+        android:fontFamily="monospace"
+        android:text="; некоторый комментарий\n
+# комментарий в стиле Unix\n
+\n
+[Section1]\n
+; комментарий о разделе\n
+var1=значение_1\n
+var2=значение_2\n
+\n
+[Section2]\n
+var1=значение_1\n
+var2=значение_2\n
+\n
+; иногда позволяется перечислять несколько значений через запятую\n
+[Section3]\n
+var1=значение_1_1,значение_1_2,значение_1_3\n
+var2=значение_2\n
+\n
+; Иногда значения отсутствуют\n
+[Section4.0]\n
+[ViewState]\n
+Mode=\n
+Vid=\n
+FolderType=Generic" />
+
+</FrameLayout>
