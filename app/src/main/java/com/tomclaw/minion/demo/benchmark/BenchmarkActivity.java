@@ -16,6 +16,8 @@ import com.tomclaw.minion.demo.utils.TaskExecutor;
 import com.tomclaw.minion.storage.MemoryStorage;
 import com.tomclaw.minion.storage.Writable;
 
+import static com.tomclaw.minion.demo.utils.StatusBarHelper.tintStatusBarIcons;
+
 /**
  * Created by solkin on 01.08.17.
  */
@@ -26,6 +28,7 @@ public class BenchmarkActivity extends AppCompatActivity implements BenchmarkTas
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        tintStatusBarIcons(this, true);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_benchmark);
 

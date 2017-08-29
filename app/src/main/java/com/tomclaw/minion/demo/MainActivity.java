@@ -14,6 +14,8 @@ import com.tomclaw.minion.demo.benchmark.BenchmarkActivity;
 
 import java.util.Arrays;
 
+import static com.tomclaw.minion.demo.utils.StatusBarHelper.tintStatusBarIcons;
+
 public class MainActivity extends AppCompatActivity implements OnItemClickListener {
 
     private static final int ITEM_BENCHMARK = 1;
@@ -22,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        tintStatusBarIcons(this, true);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 

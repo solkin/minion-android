@@ -3,44 +3,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="12dp">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:textColor="@color/colorTextPrimary"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        tools:text="Benchmark something" />
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:layout_weight="1"
-            android:textColor="@color/colorGrey"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            tools:text="Benchmark something" />
+    <TextView
+        android:id="@+id/result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:textColor="@color/colorTextSecondary"
+        android:textSize="14sp"
+        android:textStyle="normal"
+        tools:text="1024 ops/sec" />
 
-        <TextView
-            android:id="@+id/result"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:textColor="@color/colorAccent"
-            android:textSize="14sp"
-            android:textStyle="normal"
-            tools:text="1024 ops/sec" />
-
-    </LinearLayout>
-
-    <ProgressBar
+    <me.zhanghai.android.materialprogressbar.MaterialProgressBar
         android:id="@+id/progress"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:indeterminateOnly="false"
-        android:minHeight="1dp"
-        android:maxHeight="1dp"
-        tools:progress="30" />
+        android:layout_height="12dp"
+        android:indeterminate="false"
+        app:mpb_progressStyle="horizontal"
+        android:progress="30"
+        style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal" />
 
 </LinearLayout>

@@ -70,6 +70,7 @@ public abstract class BenchmarkTask extends Task {
 
     @Override
     public final void executeBackground() throws Throwable {
+        setResult("Calculating...");
         Minion minion = getMinion();
         beforeTest(minion);
         int count = getTestsCount();
