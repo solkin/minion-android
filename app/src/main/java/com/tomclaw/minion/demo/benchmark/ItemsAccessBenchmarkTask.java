@@ -39,7 +39,7 @@ public class ItemsAccessBenchmarkTask extends BenchmarkTask {
 
     @Override
     protected int getTestsCount() {
-        return 10000;
+        return 100000;
     }
 
     @Override
