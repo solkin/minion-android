@@ -167,14 +167,9 @@ class IniSyntaxHighlighter implements TextWatcher {
 
         @Override
         public void run() {
-            MainExecutor.execute(new Runnable() {
-                @Override
-                public void run() {
-                    if (highlighter != null) {
-                        highlighter.highlight(spannable);
-                    }
-                }
-            });
+            if (highlighter != null) {
+                highlighter.highlight(spannable);
+            }
         }
     }
 }
