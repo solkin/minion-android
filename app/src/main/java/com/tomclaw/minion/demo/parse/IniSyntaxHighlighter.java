@@ -7,7 +7,6 @@ import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
 
 import com.tomclaw.minion.UnsupportedFormatException;
-import com.tomclaw.minion.demo.utils.MainExecutor;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -21,6 +20,7 @@ import static com.tomclaw.minion.StreamHelper.safeClose;
 /**
  * Created by solkin on 30.08.17.
  */
+@SuppressWarnings("WeakerAccess")
 class IniSyntaxHighlighter implements TextWatcher {
 
     private static final String COMMENT_START_UNIX = "#";
@@ -160,7 +160,7 @@ class IniSyntaxHighlighter implements TextWatcher {
         private final IniSyntaxHighlighter highlighter;
         private final Spannable spannable;
 
-        public HightlightTimerTask(IniSyntaxHighlighter highlighter, Spannable spannable) {
+        HightlightTimerTask(IniSyntaxHighlighter highlighter, Spannable spannable) {
             this.highlighter = highlighter;
             this.spannable = spannable;
         }
