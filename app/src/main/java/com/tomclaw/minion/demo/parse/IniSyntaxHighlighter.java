@@ -7,6 +7,7 @@ import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
 
 import com.tomclaw.minion.UnsupportedFormatException;
+import com.tomclaw.minion.demo.utils.MainExecutor;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -167,9 +168,14 @@ class IniSyntaxHighlighter implements TextWatcher {
 
         @Override
         public void run() {
-            if (highlighter != null) {
-                highlighter.highlight(spannable);
-            }
+            MainExecutor.execute(new Runnable() {
+                @Override
+                public void run() {
+                    if (highlighter != null) {
+                        highlighter.highlight(spannable);
+                    }
+                }
+            });
         }
     }
 }
