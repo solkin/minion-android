@@ -1,24 +1,39 @@
 package com.tomclaw.minion.demo.parse;
 
-import android.graphics.Color;
+import android.support.annotation.ColorInt;
 import android.text.Editable;
 import android.text.Spannable;
 import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
+
+import com.tomclaw.minion.UnsupportedFormatException;
+
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
+import static com.tomclaw.minion.StreamHelper.safeClose;
 
 /**
  * Created by solkin on 30.08.17.
  */
 class SimpleSyntaxHighlighter implements TextWatcher {
 
-    private final ColoredToken[] TOKENS = new ColoredToken[]{
-            new ColoredToken("[", Color.BLUE),
-            new ColoredToken("]", Color.BLUE),
-            new ColoredToken("=", Color.RED),
-            new ColoredToken(";", Color.GREEN),
-            new ColoredToken("#", Color.GREEN),
-            new ColoredToken(",", Color.MAGENTA)
-    };
+    private static final String COMMENT_START_UNIX = "#";
+    private static final String COMMENT_START_WINDOWS = ";";
+    private static final String GROUP_START = "[";
+    private static final String GROUP_END = "]";
+    private static final String KEY_VALUE_DIVIDER = "=";
+    private static final String ARRAY_VALUE_DELIMITER = ",";
+
+    private static final int COMMENT_COLOR = 0xff7f8c8d;
+    private static final int GROUP_COMMA_COLOR = 0xffc0392b;
+    private static final int GROUP_NAME_COLOR = 0xffe74c3c;
+    private static final int RECORD_KEY_COLOR = 0xff3498db;
+    private static final int RECORD_EQ_COLOR = 0xff16a085;
+    private static final int RECORD_VALUE_COLOR = 0xff2ecc71;
+    private static final int RECORD_DIVIDER_COLOR = 0xff2c3e50;
 
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -30,16 +45,93 @@ class SimpleSyntaxHighlighter implements TextWatcher {
 
     @Override
     public void afterTextChanged(Editable s) {
-        for (ColoredToken coloredToken : TOKENS) {
-            String token = coloredToken.getToken();
-            int index = -1;
-            while ((index = s.toString().indexOf(token, index + 1)) >= 0) {
-                s.setSpan(
-                        new ForegroundColorSpan(coloredToken.getColorSpan()),
-                        index,
-                        index + token.length(),
-                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        try {
+            InputStream inputStream = new ByteArrayInputStream(s.toString().getBytes());
+            BufferedReader reader = null;
+            try {
+                reader = new BufferedReader(new InputStreamReader(inputStream));
+                String line;
+                int offset = 0;
+                while ((line = reader.readLine()) != null) {
+                    try {
+                        if (line.startsWith(COMMENT_START_UNIX) || line.startsWith(COMMENT_START_WINDOWS)) {
+                            applySpan(s,
+                                    COMMENT_COLOR,
+                                    offset,
+                                    offset + line.length());
+                            continue;
+                        }
+
+                        if (line.startsWith(GROUP_START) && line.endsWith(GROUP_END)) {
+                            String name = line.substring(1, line.length() - 1);
+                            int groupOffset = offset;
+                            applySpan(s,
+                                    GROUP_COMMA_COLOR,
+                                    groupOffset,
+                                    groupOffset += 1);
+                            applySpan(s,
+                                    GROUP_NAME_COLOR,
+                                    groupOffset,
+                                    groupOffset += name.length());
+                            applySpan(s,
+                                    GROUP_COMMA_COLOR,
+                                    groupOffset,
+                                    groupOffset + 1);
+                            continue;
+                        }
+
+                        if (line.contains(KEY_VALUE_DIVIDER)) {
+                            int index = line.indexOf(KEY_VALUE_DIVIDER);
+                            if (index <= 0) {
+                                throw new UnsupportedFormatException();
+                            }
+                            String key = line.substring(0, index);
+                            String value = line.substring(index + 1);
+
+                            String[] arrayValue = value.split(ARRAY_VALUE_DELIMITER);
+
+                            int recordOffset = offset;
+                            applySpan(s,
+                                    RECORD_KEY_COLOR,
+                                    recordOffset,
+                                    recordOffset += key.length());
+
+                            applySpan(s,
+                                    RECORD_EQ_COLOR,
+                                    recordOffset,
+                                    recordOffset += 1);
+
+                            int itemsCount = 0;
+                            for (String arrayItem : arrayValue) {
+                                if (itemsCount > 0) {
+                                    applySpan(s,
+                                            RECORD_DIVIDER_COLOR,
+                                            recordOffset,
+                                            recordOffset += 1);
+                                }
+                                applySpan(s,
+                                        RECORD_VALUE_COLOR,
+                                        recordOffset,
+                                        recordOffset += arrayItem.length());
+                                itemsCount++;
+                            }
+                        }
+                    } finally {
+                        offset += line.length() + 1;
+                    }
+                }
+            } finally {
+                safeClose(reader);
             }
+        } catch (Throwable ignored) {
         }
+    }
+
+    private void applySpan(Spannable spannable, @ColorInt int color, int start, int end) {
+        spannable.setSpan(
+                new ForegroundColorSpan(color),
+                start,
+                end,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
     }
 }

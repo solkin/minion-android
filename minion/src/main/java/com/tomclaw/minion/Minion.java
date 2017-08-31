@@ -27,6 +27,7 @@ import static com.tomclaw.minion.StringHelper.join;
  */
 public class Minion {
 
+    private static final String DEFAULT_GROUP_NAME = "";
     private static final String COMMENT_START_UNIX = "#";
     private static final String COMMENT_START_WINDOWS = ";";
     private static final String GROUP_START = "[";
@@ -197,7 +198,7 @@ public class Minion {
         try {
             reader = new BufferedReader(new InputStreamReader(inputStream));
             String line;
-            IniGroup lastGroup = null;
+            IniGroup lastGroup = new IniGroup(DEFAULT_GROUP_NAME);
             while ((line = reader.readLine()) != null) {
                 line = line.trim();
                 if (line.startsWith(COMMENT_START_UNIX) || line.startsWith(COMMENT_START_WINDOWS)) {
@@ -210,7 +211,7 @@ public class Minion {
                     continue;
                 }
 
-                if (line.contains(KEY_VALUE_DIVIDER) && lastGroup != null) {
+                if (line.contains(KEY_VALUE_DIVIDER)) {
                     int index = line.indexOf(KEY_VALUE_DIVIDER);
                     if (index <= 0) {
                         throw new UnsupportedFormatException();
