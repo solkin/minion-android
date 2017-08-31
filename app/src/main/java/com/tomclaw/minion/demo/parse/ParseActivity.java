@@ -1,6 +1,5 @@
 package com.tomclaw.minion.demo.parse;
 
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,10 +8,6 @@ import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.Editable;
-import android.text.Spannable;
-import android.text.TextWatcher;
-import android.text.style.ForegroundColorSpan;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -49,7 +44,7 @@ public class ParseActivity extends AppCompatActivity {
 
         input = (EditText) findViewById(R.id.input);
         if (input != null) {
-            input.addTextChangedListener(new SimpleSyntaxHighlighter());
+            input.addTextChangedListener(new IniSyntaxHighlighter());
         }
 
         loadExample();

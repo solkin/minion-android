@@ -7,18 +7,21 @@ import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
 
 import com.tomclaw.minion.UnsupportedFormatException;
+import com.tomclaw.minion.demo.utils.MainExecutor;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import static com.tomclaw.minion.StreamHelper.safeClose;
 
 /**
  * Created by solkin on 30.08.17.
  */
-class SimpleSyntaxHighlighter implements TextWatcher {
+class IniSyntaxHighlighter implements TextWatcher {
 
     private static final String COMMENT_START_UNIX = "#";
     private static final String COMMENT_START_WINDOWS = ";";
@@ -35,6 +38,14 @@ class SimpleSyntaxHighlighter implements TextWatcher {
     private static final int RECORD_VALUE_COLOR = 0xff2ecc71;
     private static final int RECORD_DIVIDER_COLOR = 0xff2c3e50;
 
+    private final Timer timer;
+    private HightlightTimerTask task;
+
+    public IniSyntaxHighlighter() {
+        timer = new Timer();
+        task = null;
+    }
+
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
     }
@@ -44,9 +55,18 @@ class SimpleSyntaxHighlighter implements TextWatcher {
     }
 
     @Override
-    public void afterTextChanged(Editable s) {
+    public void afterTextChanged(Editable editable) {
+        if (task != null) {
+            task.cancel();
+            timer.purge();
+        }
+        task = new HightlightTimerTask(this, editable);
+        timer.schedule(task, 500);
+    }
+
+    private void highlight(Spannable spannable) {
         try {
-            InputStream inputStream = new ByteArrayInputStream(s.toString().getBytes());
+            InputStream inputStream = new ByteArrayInputStream(spannable.toString().getBytes());
             BufferedReader reader = null;
             try {
                 reader = new BufferedReader(new InputStreamReader(inputStream));
@@ -55,7 +75,7 @@ class SimpleSyntaxHighlighter implements TextWatcher {
                 while ((line = reader.readLine()) != null) {
                     try {
                         if (line.startsWith(COMMENT_START_UNIX) || line.startsWith(COMMENT_START_WINDOWS)) {
-                            applySpan(s,
+                            applySpan(spannable,
                                     COMMENT_COLOR,
                                     offset,
                                     offset + line.length());
@@ -65,15 +85,15 @@ class SimpleSyntaxHighlighter implements TextWatcher {
                         if (line.startsWith(GROUP_START) && line.endsWith(GROUP_END)) {
                             String name = line.substring(1, line.length() - 1);
                             int groupOffset = offset;
-                            applySpan(s,
+                            applySpan(spannable,
                                     GROUP_COMMA_COLOR,
                                     groupOffset,
                                     groupOffset += 1);
-                            applySpan(s,
+                            applySpan(spannable,
                                     GROUP_NAME_COLOR,
                                     groupOffset,
                                     groupOffset += name.length());
-                            applySpan(s,
+                            applySpan(spannable,
                                     GROUP_COMMA_COLOR,
                                     groupOffset,
                                     groupOffset + 1);
@@ -91,12 +111,12 @@ class SimpleSyntaxHighlighter implements TextWatcher {
                             String[] arrayValue = value.split(ARRAY_VALUE_DELIMITER);
 
                             int recordOffset = offset;
-                            applySpan(s,
+                            applySpan(spannable,
                                     RECORD_KEY_COLOR,
                                     recordOffset,
                                     recordOffset += key.length());
 
-                            applySpan(s,
+                            applySpan(spannable,
                                     RECORD_EQ_COLOR,
                                     recordOffset,
                                     recordOffset += 1);
@@ -104,12 +124,12 @@ class SimpleSyntaxHighlighter implements TextWatcher {
                             int itemsCount = 0;
                             for (String arrayItem : arrayValue) {
                                 if (itemsCount > 0) {
-                                    applySpan(s,
+                                    applySpan(spannable,
                                             RECORD_DIVIDER_COLOR,
                                             recordOffset,
                                             recordOffset += 1);
                                 }
-                                applySpan(s,
+                                applySpan(spannable,
                                         RECORD_VALUE_COLOR,
                                         recordOffset,
                                         recordOffset += arrayItem.length());
@@ -133,5 +153,28 @@ class SimpleSyntaxHighlighter implements TextWatcher {
                 start,
                 end,
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+    }
+
+    private static class HightlightTimerTask extends TimerTask {
+
+        private final IniSyntaxHighlighter highlighter;
+        private final Spannable spannable;
+
+        public HightlightTimerTask(IniSyntaxHighlighter highlighter, Spannable spannable) {
+            this.highlighter = highlighter;
+            this.spannable = spannable;
+        }
+
+        @Override
+        public void run() {
+            MainExecutor.execute(new Runnable() {
+                @Override
+                public void run() {
+                    if (highlighter != null) {
+                        highlighter.highlight(spannable);
+                    }
+                }
+            });
+        }
     }
 }
