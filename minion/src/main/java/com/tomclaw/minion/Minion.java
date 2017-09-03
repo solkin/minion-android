@@ -13,6 +13,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Set;
@@ -108,6 +109,16 @@ public class Minion {
     @NonNull
     Set<String> getGroupNames() {
         return Collections.unmodifiableSet(groups.keySet());
+    }
+
+    public
+    @NonNull
+    Collection<IniGroup> getGroups() {
+        return Collections.unmodifiableCollection(groups.values());
+    }
+
+    public int getGroupsCount() {
+        return groups.size();
     }
 
     private
@@ -268,6 +279,14 @@ public class Minion {
             this.async = true;
             this.callback = callback;
             build();
+        }
+
+        public Minion buildSimple() {
+            readable = null;
+            writable = null;
+            async = false;
+            callback = new EmptyResultCallback();
+            return build();
         }
 
         private Minion build() {

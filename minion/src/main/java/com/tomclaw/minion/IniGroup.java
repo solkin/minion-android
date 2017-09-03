@@ -58,6 +58,10 @@ public class IniGroup {
         return Collections.unmodifiableCollection(records.values());
     }
 
+    public int getRecordsCount() {
+        return records.size();
+    }
+
     private
     @NonNull
     IniRecord addRecord(String key, String... value) {

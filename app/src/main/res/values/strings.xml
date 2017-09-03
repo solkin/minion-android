@@ -16,4 +16,5 @@
     <string name="please_wait">Please, wait…</string>
     <string name="parsing_result">Parsed in %1$d ms\nRead %2$d groups and %3$d records.</string>
     <string name="ok">OK</string>
+    <string name="records_count">%d records</string>
 </resources>

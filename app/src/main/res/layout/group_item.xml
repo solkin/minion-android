@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/benchmark"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingBottom="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp"
+    tools:ignore="UseCompoundDrawables">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:paddingEnd="30dp"
+        android:paddingLeft="4dp"
+        android:paddingRight="30dp"
+        android:paddingStart="4dp">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lines="1"
+            android:textColor="@color/colorTextPrimary"
+            android:textSize="16sp"
+            tools:text="Group Name" />
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lines="1"
+            android:textColor="@color/colorTextSecondary"
+            android:textSize="14sp"
+            tools:text="10 records" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/insert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginStart="0dp"
+        android:background="?selectableItemBackgroundBorderless"
+        android:src="@drawable/plus_circle"
+        android:tint="@color/colorGreen"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?selectableItemBackgroundBorderless"
+        android:src="@drawable/delete_circle"
+        android:tint="@color/colorRed"
+        tools:ignore="ContentDescription" />
+
+</LinearLayout>
