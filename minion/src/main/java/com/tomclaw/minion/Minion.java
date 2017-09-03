@@ -291,10 +291,10 @@ public class Minion {
             return build();
         }
 
-        public void async(@NonNull ResultCallback callback) {
+        public Minion async(@NonNull ResultCallback callback) {
             this.async = true;
             this.callback = callback;
-            build();
+            return build();
         }
 
         public Minion buildSimple() {

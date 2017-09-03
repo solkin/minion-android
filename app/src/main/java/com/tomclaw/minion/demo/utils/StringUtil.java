@@ -17,7 +17,7 @@ public class StringUtil {
     }
 
     public static String generateRandomString() {
-        return StringUtil.generateRandomString(16);
+        return StringUtil.generateRandomString(6 + random.nextInt(10));
     }
 
     public static String generateRandomString(int length) {

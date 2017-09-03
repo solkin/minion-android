@@ -23,6 +23,8 @@ import static com.tomclaw.minion.demo.utils.StatusBarHelper.tintStatusBarIcons;
  */
 public class ParseActivity extends AppCompatActivity {
 
+    public static final String EXTRA_INI_STRUCTURE = "ini_structure";
+
     private
     @Nullable
     EditText input;
@@ -47,7 +49,14 @@ public class ParseActivity extends AppCompatActivity {
             input.addTextChangedListener(new IniSyntaxHighlighter());
         }
 
-        loadExample();
+        if (savedInstanceState == null) {
+            String extra = getIntent().getStringExtra(EXTRA_INI_STRUCTURE);
+            if (extra != null) {
+                input.setText(extra);
+            } else {
+                loadExample();
+            }
+        }
     }
 
     private void loadExample() {

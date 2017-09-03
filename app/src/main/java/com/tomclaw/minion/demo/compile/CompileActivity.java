@@ -1,5 +1,6 @@
 package com.tomclaw.minion.demo.compile;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,11 +14,20 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.tomclaw.minion.EmptyResultCallback;
 import com.tomclaw.minion.IniGroup;
 import com.tomclaw.minion.IniRecord;
 import com.tomclaw.minion.Minion;
+import com.tomclaw.minion.ResultCallback;
+import com.tomclaw.minion.StreamHelper;
 import com.tomclaw.minion.demo.R;
+import com.tomclaw.minion.demo.parse.ParseActivity;
+import com.tomclaw.minion.storage.MemoryStorage;
 
+import java.io.IOException;
+import java.util.Random;
+
+import static com.tomclaw.minion.demo.parse.ParseActivity.EXTRA_INI_STRUCTURE;
 import static com.tomclaw.minion.demo.utils.StatusBarHelper.tintStatusBarIcons;
 import static com.tomclaw.minion.demo.utils.StringUtil.generateRandomString;
 
@@ -26,8 +36,10 @@ import static com.tomclaw.minion.demo.utils.StringUtil.generateRandomString;
  */
 public class CompileActivity extends AppCompatActivity implements GroupListener, RecordListener {
 
+    private MemoryStorage storage;
     private Minion minion;
     private MinionRecyclerAdapter adapter;
+    private Random random = new Random(System.currentTimeMillis());
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,10 +66,11 @@ public class CompileActivity extends AppCompatActivity implements GroupListener,
         adapter.setGroupListener(this);
         adapter.setRecordListener(this);
 
-        minion = Minion.lets().buildSimple();
-        for (int c = 0; c < 3; c++) {
+        storage = MemoryStorage.create();
+        minion = Minion.lets().store(storage).async(new EmptyResultCallback());
+        for (int c = 0; c < random.nextInt(10) + 10; c++) {
             String name = generateRandomString();
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < random.nextInt(20) + 20; i++) {
                 minion.setValue(name, generateRandomString(), generateRandomString());
             }
         }
@@ -91,6 +104,22 @@ public class CompileActivity extends AppCompatActivity implements GroupListener,
                 adapter.notifyDataSetChanged();
                 break;
             case R.id.compile:
+                minion.store(new ResultCallback() {
+                    @Override
+                    public void onReady(Minion minion) {
+                        try {
+                            String string = new String(StreamHelper.readFully(storage), "UTF-8");
+                            Intent intent = new Intent(CompileActivity.this, ParseActivity.class)
+                                    .putExtra(EXTRA_INI_STRUCTURE, string);
+                            startActivity(intent);
+                        } catch (IOException ignored) {
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Exception ex) {
+                    }
+                });
                 break;
         }
         return super.onOptionsItemSelected(item);

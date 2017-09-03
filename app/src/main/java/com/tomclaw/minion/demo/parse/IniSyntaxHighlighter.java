@@ -62,7 +62,7 @@ class IniSyntaxHighlighter implements TextWatcher {
             timer.purge();
         }
         task = new HightlightTimerTask(this, editable);
-        timer.schedule(task, 500);
+        timer.schedule(task, 250);
     }
 
     private void highlight(Spannable spannable) {

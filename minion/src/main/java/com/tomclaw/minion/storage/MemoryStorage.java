@@ -1,30 +1,30 @@
 package com.tomclaw.minion.storage;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.PipedInputStream;
-import java.io.PipedOutputStream;
 
 /**
  * Created by solkin on 28.07.17.
  */
 public class MemoryStorage implements Readable, Writable {
 
-    private PipedInputStream inputStream;
+    private ByteArrayOutputStream stream;
 
     private MemoryStorage() {
-        inputStream = new PipedInputStream();
+        stream = new ByteArrayOutputStream();
     }
 
     @Override
     public InputStream read() {
-        return inputStream;
+        return new ByteArrayInputStream(stream.toByteArray());
     }
 
     @Override
     public OutputStream write() throws IOException {
-        return new PipedOutputStream(inputStream);
+        return stream;
     }
 
     public static MemoryStorage create() {
