@@ -14,20 +14,19 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.tomclaw.minion.EmptyResultCallback;
 import com.tomclaw.minion.IniGroup;
 import com.tomclaw.minion.IniRecord;
 import com.tomclaw.minion.Minion;
-import com.tomclaw.minion.ResultCallback;
 import com.tomclaw.minion.StreamHelper;
 import com.tomclaw.minion.demo.R;
 import com.tomclaw.minion.demo.parse.ParseActivity;
 import com.tomclaw.minion.storage.MemoryStorage;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Random;
 
-import static com.tomclaw.minion.demo.parse.ParseActivity.EXTRA_INI_STRUCTURE;
+import static com.tomclaw.minion.StreamHelper.safeClose;
 import static com.tomclaw.minion.demo.utils.StatusBarHelper.tintStatusBarIcons;
 import static com.tomclaw.minion.demo.utils.StringUtil.generateRandomString;
 
@@ -35,6 +34,8 @@ import static com.tomclaw.minion.demo.utils.StringUtil.generateRandomString;
  * Created by solkin on 01.08.17.
  */
 public class CompileActivity extends AppCompatActivity implements GroupListener, RecordListener {
+
+    public static final String EXTRA_INI_STRUCTURE = "ini_structure";
 
     private MemoryStorage storage;
     private Minion minion;
@@ -67,16 +68,46 @@ public class CompileActivity extends AppCompatActivity implements GroupListener,
         adapter.setRecordListener(this);
 
         storage = MemoryStorage.create();
-        minion = Minion.lets().store(storage).async(new EmptyResultCallback());
-        for (int c = 0; c < random.nextInt(10) + 10; c++) {
-            String name = generateRandomString();
-            for (int i = 0; i < random.nextInt(20) + 20; i++) {
-                minion.setValue(name, generateRandomString(), generateRandomString());
+        if (savedInstanceState == null) {
+            String extra = getIntent().getStringExtra(EXTRA_INI_STRUCTURE);
+            if (extra != null) {
+                bytesToStorage(extra.getBytes());
+            } else {
+                // Default state.
+            }
+        } else {
+            final byte[] data = savedInstanceState.getByteArray(EXTRA_INI_STRUCTURE);
+            if (data != null) {
+                bytesToStorage(data);
             }
         }
+        minion = Minion.lets().load(storage).and().store(storage).sync();
 
         adapter.setData(minion);
         adapter.notifyDataSetChanged();
+    }
+
+    private void bytesToStorage(byte[] data) {
+        OutputStream outputStream = null;
+        try {
+            outputStream = storage.write();
+            outputStream.write(data);
+            outputStream.flush();
+        } catch (IOException ignored) {
+        } finally {
+            safeClose(outputStream);
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        minion.store();
+        try {
+            byte[] data = StreamHelper.readFully(storage);
+            outState.putByteArray(EXTRA_INI_STRUCTURE, data);
+        } catch (IOException ignored) {
+        }
     }
 
     @Override
@@ -104,22 +135,14 @@ public class CompileActivity extends AppCompatActivity implements GroupListener,
                 adapter.notifyDataSetChanged();
                 break;
             case R.id.compile:
-                minion.store(new ResultCallback() {
-                    @Override
-                    public void onReady(Minion minion) {
-                        try {
-                            String string = new String(StreamHelper.readFully(storage), "UTF-8");
-                            Intent intent = new Intent(CompileActivity.this, ParseActivity.class)
-                                    .putExtra(EXTRA_INI_STRUCTURE, string);
-                            startActivity(intent);
-                        } catch (IOException ignored) {
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Exception ex) {
-                    }
-                });
+                minion.store();
+                try {
+                    String string = new String(StreamHelper.readFully(storage), "UTF-8");
+                    Intent intent = new Intent(CompileActivity.this, ParseActivity.class)
+                            .putExtra(ParseActivity.EXTRA_INI_STRUCTURE, string);
+                    startActivity(intent);
+                } catch (IOException ignored) {
+                }
                 break;
         }
         return super.onOptionsItemSelected(item);
