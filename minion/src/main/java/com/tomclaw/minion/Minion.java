@@ -129,6 +129,22 @@ public class Minion {
         return group;
     }
 
+    public
+    @Nullable
+    IniGroup removeGroup(String name) {
+        return groups.remove(name);
+    }
+
+    public
+    @Nullable
+    IniRecord removeRecord(String name, String key) {
+        IniGroup group = getGroup(name);
+        if (group != null) {
+            return group.removeRecord(key);
+        }
+        return null;
+    }
+
     public void store() {
         store(new EmptyResultCallback());
     }

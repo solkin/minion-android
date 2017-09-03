@@ -1,12 +1,16 @@
 package com.tomclaw.minion.demo.compile;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import com.tomclaw.minion.IniGroup;
@@ -21,6 +25,9 @@ import static com.tomclaw.minion.demo.utils.StringUtil.generateRandomString;
  * Created by solkin on 01.08.17.
  */
 public class CompileActivity extends AppCompatActivity implements GroupListener, RecordListener {
+
+    private Minion minion;
+    private MinionRecyclerAdapter adapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,7 +44,7 @@ public class CompileActivity extends AppCompatActivity implements GroupListener,
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        MinionRecyclerAdapter adapter = new MinionRecyclerAdapter(this);
+        adapter = new MinionRecyclerAdapter(this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,
                 LinearLayoutManager.VERTICAL, false);
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler);
@@ -47,7 +54,7 @@ public class CompileActivity extends AppCompatActivity implements GroupListener,
         adapter.setGroupListener(this);
         adapter.setRecordListener(this);
 
-        Minion minion = Minion.lets().buildSimple();
+        minion = Minion.lets().buildSimple();
         for (int c = 0; c < 3; c++) {
             String name = generateRandomString();
             for (int i = 0; i < 10; i++) {
@@ -60,10 +67,30 @@ public class CompileActivity extends AppCompatActivity implements GroupListener,
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_compile, menu);
+        for (int c = 0; c < menu.size(); c++) {
+            MenuItem item = menu.getItem(c);
+            Drawable drawable = item.getIcon();
+            drawable = DrawableCompat.wrap(drawable);
+            DrawableCompat.setTint(drawable, ContextCompat.getColor(this, R.color.colorAccent));
+            item.setIcon(drawable);
+        }
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
+                break;
+            case R.id.insert:
+                minion.getOrCreateGroup(generateRandomString());
+                adapter.setData(minion);
+                adapter.notifyDataSetChanged();
+                break;
+            case R.id.compile:
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -71,16 +98,22 @@ public class CompileActivity extends AppCompatActivity implements GroupListener,
 
     @Override
     public void onInsertRecord(IniGroup item) {
-
+        minion.setValue(item.getName(), generateRandomString(), generateRandomString());
+        adapter.setData(minion);
+        adapter.notifyDataSetChanged();
     }
 
     @Override
     public void onGroupDelete(IniGroup item) {
-
+        minion.removeGroup(item.getName());
+        adapter.setData(minion);
+        adapter.notifyDataSetChanged();
     }
 
     @Override
     public void onDeleteRecord(IniGroup group, IniRecord record) {
-
+        minion.removeRecord(group.getName(), record.getKey());
+        adapter.setData(minion);
+        adapter.notifyDataSetChanged();
     }
 }

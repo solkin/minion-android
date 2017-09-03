@@ -17,4 +17,6 @@
     <string name="parsing_result">Parsed in %1$d ms\nRead %2$d groups and %3$d records.</string>
     <string name="ok">OK</string>
     <string name="records_count">%d records</string>
+    <string name="compile_action">Compile</string>
+    <string name="insert_action">Insert group</string>
 </resources>

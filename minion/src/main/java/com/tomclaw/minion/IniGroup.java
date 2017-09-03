@@ -62,6 +62,12 @@ public class IniGroup {
         return records.size();
     }
 
+    public
+    @Nullable
+    IniRecord removeRecord(String key) {
+        return records.remove(key);
+    }
+
     private
     @NonNull
     IniRecord addRecord(String key, String... value) {
