@@ -24,7 +24,6 @@ import com.tomclaw.minion.storage.MemoryStorage;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.Random;
 
 import static com.tomclaw.minion.StreamHelper.safeClose;
 import static com.tomclaw.minion.demo.utils.StatusBarHelper.tintStatusBarIcons;
@@ -40,7 +39,6 @@ public class CompileActivity extends AppCompatActivity implements GroupListener,
     private MemoryStorage storage;
     private Minion minion;
     private MinionRecyclerAdapter adapter;
-    private Random random = new Random(System.currentTimeMillis());
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -141,6 +139,7 @@ public class CompileActivity extends AppCompatActivity implements GroupListener,
                     Intent intent = new Intent(CompileActivity.this, ParseActivity.class)
                             .putExtra(ParseActivity.EXTRA_INI_STRUCTURE, string);
                     startActivity(intent);
+                    finish();
                 } catch (IOException ignored) {
                 }
                 break;

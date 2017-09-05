@@ -24,6 +24,7 @@ public class MemoryStorage implements Readable, Writable {
 
     @Override
     public OutputStream write() throws IOException {
+        stream.reset();
         return stream;
     }
 

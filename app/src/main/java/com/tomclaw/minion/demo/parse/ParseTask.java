@@ -1,5 +1,6 @@
 package com.tomclaw.minion.demo.parse;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -24,7 +25,7 @@ import static com.tomclaw.minion.StreamHelper.readFully;
 /**
  * Created by solkin on 30.08.17.
  */
-public class ParseTask extends PleaseWaitTask {
+public class ParseTask extends PleaseWaitTask<Activity> {
 
     @NonNull
     private final String data;
@@ -35,8 +36,8 @@ public class ParseTask extends PleaseWaitTask {
     private @Nullable
     MemoryStorage storage;
 
-    public ParseTask(@NonNull Context context, @NonNull String data) {
-        super(context);
+    public ParseTask(@NonNull Activity activity, @NonNull String data) {
+        super(activity);
         this.data = data;
     }
 
@@ -55,15 +56,15 @@ public class ParseTask extends PleaseWaitTask {
 
     @Override
     public void onProgressClosed() {
-        final Context context = getWeakObject();
-        if (context != null && minion != null) {
+        final Activity activity = getWeakObject();
+        if (activity != null && minion != null) {
             Set<String> names = minion.getGroupNames();
             int recordsCount = 0;
             for (String name : names) {
                 recordsCount += minion.getOrCreateGroup(name).getRecords().size();
             }
-            String result = context.getString(R.string.parsing_result, delay, names.size(), recordsCount);
-            new AlertDialog.Builder(context)
+            String result = activity.getString(R.string.parsing_result, delay, names.size(), recordsCount);
+            new AlertDialog.Builder(activity)
                     .setTitle(R.string.parse_action)
                     .setMessage(result)
                     .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
@@ -72,9 +73,10 @@ public class ParseTask extends PleaseWaitTask {
                             try {
                                 minion.store();
                                 String data = new String(readFully(storage), "UTF-8");
-                                Intent intent = new Intent(context, CompileActivity.class)
+                                Intent intent = new Intent(activity, CompileActivity.class)
                                         .putExtra(CompileActivity.EXTRA_INI_STRUCTURE, data);
-                                context.startActivity(intent);
+                                activity.startActivity(intent);
+                                activity.finish();
                             } catch (IOException ignored) {
                             }
                         }
