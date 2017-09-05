@@ -49,7 +49,6 @@
             android:textSize="14sp"
             tools:text="@string/benchmark_description" />
 
-
     </LinearLayout>
 
 </LinearLayout>
