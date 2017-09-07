@@ -28,6 +28,24 @@ public class MemoryStorageUnitTest {
         assertArrayEquals(writeData, readData);
     }
 
+    @Test
+    public void writeAfterWrite_dataOverwritten() throws Exception {
+        byte[] oldData = createRandomData();
+        byte[] newData = createRandomData();
+        MemoryStorage storage = createMemoryStorage();
+        OutputStream output = storage.write();
+        output.write(oldData);
+        output.close();
+
+        output = storage.write();
+        output.write(newData);
+        output.close();
+
+        byte[] readData = readFully(storage);
+
+        assertArrayEquals(newData, readData);
+    }
+
     private byte[] createRandomData() {
         return "sample data".getBytes();
     }

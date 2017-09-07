@@ -75,4 +75,20 @@ public class IniGroup {
         records.put(record.getKey(), record);
         return record;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        IniGroup group = (IniGroup) o;
+        return name.equals(group.name) && records.equals(group.records);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name.hashCode();
+        result = 31 * result + records.hashCode();
+        return result;
+    }
 }

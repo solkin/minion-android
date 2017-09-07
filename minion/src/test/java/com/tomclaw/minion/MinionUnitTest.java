@@ -9,6 +9,8 @@ import org.junit.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Collection;
+import java.util.Set;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
@@ -66,6 +68,52 @@ public class MinionUnitTest {
     }
 
     @Test
+    public void getGroupNames_returnGroupNamesCorrectly() {
+        MemoryStorage storage = MemoryStorage.create();
+        Minion minion = Minion.lets()
+                .load(storage)
+                .sync();
+        minion.getOrCreateGroup("test_group_1");
+        minion.getOrCreateGroup("test_group_2");
+
+        Set<String> groupNames = minion.getGroupNames();
+
+        assertArrayEquals(groupNames.toArray(), new String[]{"test_group_1", "test_group_2"});
+    }
+
+    @Test
+    public void getGroupsCount_returnGroupsCountCorrectly() {
+        MemoryStorage storage = MemoryStorage.create();
+        Minion minion = Minion.lets()
+                .load(storage)
+                .sync();
+        minion.getOrCreateGroup("test_group_1");
+        minion.getOrCreateGroup("test_group_2");
+
+        int groupsCount = minion.getGroupsCount();
+
+        assertEquals(groupsCount, 2);
+    }
+
+    @Test
+    public void getGroups_returnGroupsCorrectly() {
+        IniGroup[] original = new IniGroup[]{
+                new IniGroup("test_group_1"),
+                new IniGroup("test_group_2")
+        };
+        MemoryStorage storage = MemoryStorage.create();
+        Minion minion = Minion.lets()
+                .load(storage)
+                .sync();
+        minion.getOrCreateGroup("test_group_1");
+        minion.getOrCreateGroup("test_group_2");
+
+        Collection<IniGroup> groups = minion.getGroups();
+
+        assertArrayEquals(groups.toArray(), original);
+    }
+
+    @Test
     public void getOrCreateGroup_createGroupIfNotExist() {
         String name = "test_group";
         MemoryStorage storage = MemoryStorage.create();
@@ -78,6 +126,21 @@ public class MinionUnitTest {
         IniGroup group = minion.getGroup(name);
         assertNotNull(group);
         assertEquals(group.getName(), name);
+    }
+
+    @Test
+    public void removeGroup_removeGroupCorrectly() {
+        String name = "test_group";
+        MemoryStorage storage = MemoryStorage.create();
+        Minion minion = Minion.lets()
+                .load(storage)
+                .sync();
+        minion.getOrCreateGroup(name);
+
+        minion.removeGroup(name);
+
+        IniGroup group = minion.getGroup(name);
+        assertNull(group);
     }
 
     @Test
@@ -94,6 +157,40 @@ public class MinionUnitTest {
 
         String resultValue = minion.getValue(name, key);
         assertEquals(resultValue, value);
+    }
+
+    @Test
+    public void removeRecord_removesRecordAndReturnIt_ifRecordExist() {
+        String name = "test_group";
+        String key = "test_key";
+        String value = "test_value";
+        MemoryStorage storage = MemoryStorage.create();
+        Minion minion = Minion.lets()
+                .load(storage)
+                .sync();
+        IniRecord original = minion.setValue(name, key, value);
+
+        IniRecord removed = minion.removeRecord(name, key);
+
+        assertEquals(original, removed);
+        String resultValue = minion.getValue(name, key);
+        assertNull(resultValue);
+    }
+
+    @Test
+    public void removeRecord_removesRecordAndReturnNull_ifRecordDoesNotExist() {
+        String name = "test_group";
+        String key = "test_key";
+        String value = "test_value";
+        MemoryStorage storage = MemoryStorage.create();
+        Minion minion = Minion.lets()
+                .load(storage)
+                .sync();
+        minion.setValue(name, key, value);
+
+        IniRecord removed = minion.removeRecord(name, "non_exist_key");
+
+        assertNull(removed);
     }
 
     @Test
