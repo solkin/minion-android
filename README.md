@@ -1,4 +1,4 @@
-# Minion for Android
+# Minion for Android [![Build Status](https://travis-ci.org/solkin/minion-android.svg?branch=master)](https://travis-ci.org/solkin/minion-android)
 Minion is an INI parser and builder library
 
 Example:
