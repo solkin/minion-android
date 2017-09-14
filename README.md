@@ -55,3 +55,43 @@ Minion minion = Minion.lets()
         .load(storage)
         .sync();
 ```
+
+### Set values for specified group and key
+If no such group or key exist, they will be created.
+
+```java
+minion.setValue("user", "name", "Michael");
+```
+
+It's also extremely easy to set an array of values.
+
+```java
+minion.setValue("music", "genres", "Classical", "Lounge", "Dance", "Pop");
+```
+
+### Get values for specified group and key
+If no such group exist, it will be created.
+
+```java
+String name = minion.getValue("user", "name");
+```
+
+Or you can obtain array of values.
+
+```java
+String[] genres = genresminion.getValues("music", "genres");
+```
+
+### Remove record
+Of course, you may just simply remove key and value. Function `removeRecord` will return removed record. If it doesn't exist, method will return `null`.
+
+```java
+IniRecord record = minion.removeRecord("user", "name");
+```
+
+### Remove group
+Minion allows to remove whole group of records too. Function `removeGroup` will return removed group with removed records. If it doesn't exist, method will return `null`.
+
+```java
+IniGroup group = minion.removeGroup("music");
+```
