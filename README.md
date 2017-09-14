@@ -82,6 +82,19 @@ Or you can obtain array of values.
 String[] genres = genresminion.getValues("music", "genres");
 ```
 
+### Get all groups
+Returns all group names.
+
+```java
+Set<String> names = minion.getGroupNames();
+```
+
+Returns all groups with records.
+
+```java
+List<IniGroup> groups = minion.getGroups();
+```
+
 ### Remove record
 Of course, you may just simply remove key and value. Function `removeRecord` will return removed record. If it doesn't exist, method will return `null`.
 
