@@ -76,7 +76,7 @@ public class Minion {
 
     public
     @Nullable
-    String[] getArrayValue(@NonNull String name,
+    String[] getValues(@NonNull String name,
                            @NonNull String key) {
         String[] value = null;
         IniGroup group = getOrCreateGroup(name);

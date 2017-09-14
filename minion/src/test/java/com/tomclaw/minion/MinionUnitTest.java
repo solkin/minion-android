@@ -33,7 +33,7 @@ public class MinionUnitTest {
 
         assertEquals(minion.getValue("first_group", "first_key"), "first_value");
         assertEquals(minion.getValue("second_group", "second_key"), "second_value");
-        assertArrayEquals(minion.getArrayValue("second_group", "array_key"),
+        assertArrayEquals(minion.getValues("second_group", "array_key"),
                 new String[]{"value1", "value2", "value3"});
     }
 
@@ -194,7 +194,7 @@ public class MinionUnitTest {
     }
 
     @Test
-    public void setArrayValue_setsArrayValueCorrectly() {
+    public void getValues_getsValuesCorrectly() {
         String name = "test_group";
         String key = "test_key";
         String value1 = "test_value1";
@@ -207,7 +207,7 @@ public class MinionUnitTest {
 
         minion.setValue(name, key, value1, value2, value3);
 
-        String[] resultValue = minion.getArrayValue(name, key);
+        String[] resultValue = minion.getValues(name, key);
         assertArrayEquals(resultValue, new String[]{value1, value2, value3});
     }
 
