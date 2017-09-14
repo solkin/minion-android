@@ -5,12 +5,12 @@ import android.support.annotation.NonNull;
 import com.tomclaw.minion.Minion;
 import com.tomclaw.minion.demo.R;
 
-import static com.tomclaw.minion.demo.utils.StringUtil.generateRandomString;
-
 /**
  * Created by solkin on 09.08.17.
  */
 public class GroupsCreationBenchmarkTask extends BenchmarkTask {
+
+    private int index;
 
     public GroupsCreationBenchmarkTask(@NonNull Minion minion,
                                        @NonNull BenchmarkRecyclerAdapter adapter,
@@ -35,10 +35,11 @@ public class GroupsCreationBenchmarkTask extends BenchmarkTask {
 
     @Override
     protected void beforeTest(Minion minion) {
+        index = 0;
     }
 
     @Override
     protected void runTest(Minion minion) {
-        minion.getOrCreateGroup(generateRandomString());
+        minion.getOrCreateGroup("group" + index++);
     }
 }

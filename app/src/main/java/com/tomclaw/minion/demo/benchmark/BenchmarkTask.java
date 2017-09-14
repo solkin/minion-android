@@ -76,15 +76,18 @@ public abstract class BenchmarkTask extends Task {
         Minion minion = getMinion();
         beforeTest(minion);
         int count = getTestsCount();
-        long time = System.currentTimeMillis();
-        for (int c = 0; c < count; c++) {
-            runTest(minion);
-            setProgress(100 * c / count);
+        int iterations = 5;
+        long total = 0;
+        for (int c = 0; c < iterations; c++) {
+            long time = System.currentTimeMillis();
+            for (int i = 0; i < count / iterations; i++) {
+                runTest(minion);
+            }
+            total += System.currentTimeMillis() - time;
+            setProgress(100 * c / iterations);
             updateItem();
         }
-        time -= System.currentTimeMillis();
-        time *= -1;
-        setResult((count * TimeUnit.SECONDS.toMillis(1) / time) + " ops/sec");
+        setResult((count * TimeUnit.SECONDS.toMillis(1) / total) + " ops/sec");
     }
 
     protected abstract void beforeTest(Minion minion);

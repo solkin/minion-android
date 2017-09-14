@@ -6,20 +6,14 @@ import com.tomclaw.minion.IniGroup;
 import com.tomclaw.minion.Minion;
 import com.tomclaw.minion.demo.R;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
-import static com.tomclaw.minion.demo.utils.StringUtil.generateRandomString;
-
 /**
  * Created by solkin on 09.08.17.
  */
 public class ItemsAccessBenchmarkTask extends BenchmarkTask {
 
-    private Random random;
     private String name;
-    private List<String> keys;
+    private String[] keys;
+    private int index;
 
     public ItemsAccessBenchmarkTask(@NonNull Minion minion,
                                     @NonNull BenchmarkRecyclerAdapter adapter,
@@ -44,21 +38,21 @@ public class ItemsAccessBenchmarkTask extends BenchmarkTask {
 
     @Override
     protected void beforeTest(Minion minion) {
-        random = new Random(System.currentTimeMillis());
-        name = generateRandomString();
-        keys = new ArrayList<>();
         int count = getTestsCount();
+        index = 0;
+        name = "name";
+        keys = new String[count];
         IniGroup group = minion.getOrCreateGroup(name);
         for (int c = 0; c < count; c++) {
-            String key = generateRandomString();
-            keys.add(key);
-            group.getOrCreateRecord(key, generateRandomString());
+            String key = "key" + c;
+            keys[c] = key;
+            group.getOrCreateRecord(key, "value" + c);
         }
     }
 
     @Override
     protected void runTest(Minion minion) {
-        String key = keys.get(random.nextInt(keys.size()));
+        String key = keys[index++];
         minion.getValue(name, key);
     }
 }

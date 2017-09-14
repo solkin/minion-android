@@ -13,6 +13,7 @@ import static com.tomclaw.minion.demo.utils.StringUtil.generateRandomString;
 public class ItemsCreationBenchmarkTask extends BenchmarkTask {
 
     private String name;
+    private int index;
 
     public ItemsCreationBenchmarkTask(@NonNull Minion minion,
                                       @NonNull BenchmarkRecyclerAdapter adapter,
@@ -37,12 +38,13 @@ public class ItemsCreationBenchmarkTask extends BenchmarkTask {
 
     @Override
     protected void beforeTest(Minion minion) {
+        index = 0;
         name = generateRandomString();
         minion.getOrCreateGroup(name);
     }
 
     @Override
     protected void runTest(Minion minion) {
-        minion.setValue(name, generateRandomString(), generateRandomString());
+        minion.setValue(name, "key" + index, "value" + index++);
     }
 }

@@ -5,19 +5,13 @@ import android.support.annotation.NonNull;
 import com.tomclaw.minion.Minion;
 import com.tomclaw.minion.demo.R;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
-import static com.tomclaw.minion.demo.utils.StringUtil.generateRandomString;
-
 /**
  * Created by solkin on 09.08.17.
  */
 public class GroupsAccessBenchmarkTask extends BenchmarkTask {
 
-    private Random random;
-    private List<String> names;
+    private String[] names;
+    private int index;
 
     public GroupsAccessBenchmarkTask(@NonNull Minion minion,
                                      @NonNull BenchmarkRecyclerAdapter adapter,
@@ -42,19 +36,19 @@ public class GroupsAccessBenchmarkTask extends BenchmarkTask {
 
     @Override
     protected void beforeTest(Minion minion) {
-        random = new Random(System.currentTimeMillis());
-        names = new ArrayList<>();
         int count = getTestsCount();
+        index = 0;
+        names = new String[count];
         for (int c = 0; c < count; c++) {
-            String name = generateRandomString();
-            names.add(name);
+            String name = "name" + c;
+            names[c] = name;
             minion.getOrCreateGroup(name);
         }
     }
 
     @Override
     protected void runTest(Minion minion) {
-        String name = names.get(random.nextInt(names.size()));
+        String name = names[index++];
         minion.getGroup(name);
     }
 }
