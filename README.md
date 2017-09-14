@@ -1,5 +1,5 @@
 # Minion for Android
-[![Build Status](https://travis-ci.org/solkin/minion-android.svg?branch=master)](https://travis-ci.org/solkin/minion-android)
+[![Build Status](https://travis-ci.org/solkin/minion-android.svg?branch=master)](https://travis-ci.org/solkin/minion-android) [![Download](https://api.bintray.com/packages/solkin/minion/minion-android/images/download.svg) ](https://bintray.com/solkin/minion/minion-android/_latestVersion)
 
 Minion is a handy group-key-value data storage library, powered by INI format. Let you parse and store INI format. Designed with modern fluent interface.
 
