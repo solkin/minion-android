@@ -14,18 +14,19 @@ import java.util.List;
 /**
  * Created by solkin on 03.08.17.
  */
-class BenchmarkRecyclerAdapter extends RecyclerView.Adapter<BenchmarkItemViewHolder> {
+@SuppressWarnings("WeakerAccess")
+public class BenchmarkRecyclerAdapter extends RecyclerView.Adapter<BenchmarkItemViewHolder> {
 
     private final Context context;
     private final List<BenchmarkItem> list;
 
-    BenchmarkRecyclerAdapter(Context context) {
+    public BenchmarkRecyclerAdapter(Context context) {
         this.context = context;
         this.list = new ArrayList<>();
         setHasStableIds(true);
     }
 
-    int appendItem(BenchmarkItem item) {
+    public int appendItem(BenchmarkItem item) {
         list.add(item);
         return list.size() - 1;
     }

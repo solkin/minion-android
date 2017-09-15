@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 /**
  * Created by solkin on 03.08.17.
  */
+@SuppressWarnings("WeakerAccess")
 public class SectionItem {
 
     private int id;
@@ -36,12 +37,12 @@ public class SectionItem {
     }
 
     @NonNull
-    String getText() {
+    public String getText() {
         return text;
     }
 
     @NonNull
-    String getDescription() {
+    public String getDescription() {
         return description;
     }
 }

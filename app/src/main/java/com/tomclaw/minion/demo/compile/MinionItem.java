@@ -9,7 +9,8 @@ import com.tomclaw.minion.IniRecord;
 /**
  * Created by solkin on 03.09.17.
  */
-class MinionItem {
+@SuppressWarnings("WeakerAccess")
+public class MinionItem {
 
     @NonNull
     private final
@@ -18,27 +19,27 @@ class MinionItem {
     @Nullable
     IniRecord record;
 
-    MinionItem(@NonNull IniGroup group) {
+    public MinionItem(@NonNull IniGroup group) {
         this.group = group;
         this.record = null;
     }
 
-    MinionItem(@NonNull IniGroup group, @NonNull IniRecord record) {
+    public MinionItem(@NonNull IniGroup group, @NonNull IniRecord record) {
         this.group = group;
         this.record = record;
     }
 
-    boolean isGroup() {
+    public boolean isGroup() {
         return record == null;
     }
 
     @Nullable
-    IniGroup getGroup() {
+    public IniGroup getGroup() {
         return group;
     }
 
     @Nullable
-    IniRecord getRecord() {
+    public IniRecord getRecord() {
         return record;
     }
 }

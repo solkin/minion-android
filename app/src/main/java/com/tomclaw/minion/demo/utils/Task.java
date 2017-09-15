@@ -38,22 +38,28 @@ public abstract class Task implements Runnable {
     }
 
     public void onPreExecuteMain() {
+        // Empty method for optional override
     }
 
     public abstract void executeBackground() throws Throwable;
 
     public void onPostExecuteMain() {
+        // Empty method for optional override
     }
 
     public void onSuccessBackground() {
+        // Empty method for optional override
     }
 
     public void onFailBackground() {
+        // Empty method for optional override
     }
 
     public void onSuccessMain() {
+        // Empty method for optional override
     }
 
     public void onFailMain(Throwable ex) {
+        // Empty method for optional override
     }
 }

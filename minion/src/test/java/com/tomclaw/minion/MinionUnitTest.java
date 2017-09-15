@@ -194,6 +194,22 @@ public class MinionUnitTest {
     }
 
     @Test
+    public void getValue_getsValueCorrectly() {
+        String name = "test_group";
+        String key = "test_key";
+        String value1 = "test_value";
+        MemoryStorage storage = MemoryStorage.create();
+        Minion minion = Minion.lets()
+                .load(storage)
+                .sync();
+
+        minion.setValue(name, key, value1);
+
+        String resultValue = minion.getValue(name, key);
+        assertEquals(resultValue, value1);
+    }
+
+    @Test
     public void getValues_getsValuesCorrectly() {
         String name = "test_group";
         String key = "test_key";

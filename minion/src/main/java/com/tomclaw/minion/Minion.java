@@ -66,10 +66,8 @@ public class Minion {
         String value = null;
         IniGroup group = getOrCreateGroup(name);
         IniRecord record = group.getRecord(key);
-        if (record != null) {
-            if (record.isArrayValue()) {
-                value = record.getValue()[0];
-            }
+        if (record != null && record.isArrayValue()) {
+            value = record.getValue()[0];
         }
         return value;
     }

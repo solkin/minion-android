@@ -11,6 +11,7 @@ import java.util.Map;
 /**
  * Created by solkin on 28.07.17.
  */
+@SuppressWarnings("WeakerAccess")
 public class IniGroup {
 
     private final
@@ -38,11 +39,11 @@ public class IniGroup {
     public
     @NonNull
     IniRecord getOrCreateRecord(String key, String... value) {
-        key = key.trim();
+        String trimmedKey = key.trim();
         synchronized (records) {
-            IniRecord record = getRecord(key);
+            IniRecord record = getRecord(trimmedKey);
             if (record == null) {
-                record = addRecord(key, value);
+                record = addRecord(trimmedKey, value);
             }
             return record;
         }

@@ -20,7 +20,8 @@ import java.util.List;
 /**
  * Created by solkin on 03.09.17.
  */
-class MinionRecyclerAdapter extends RecyclerView.Adapter<MinionViewHolder> {
+@SuppressWarnings("WeakerAccess")
+public class MinionRecyclerAdapter extends RecyclerView.Adapter<MinionViewHolder> {
 
     private static final int TYPE_GROUP = 0x01;
     private static final int TYPE_RECORD = 0x02;
@@ -38,7 +39,7 @@ class MinionRecyclerAdapter extends RecyclerView.Adapter<MinionViewHolder> {
     @Nullable
     RecordListener recordListener;
 
-    MinionRecyclerAdapter(Context context) {
+    public MinionRecyclerAdapter(Context context) {
         this.layoutInflater = LayoutInflater.from(context);
         items = new ArrayList<>();
     }
@@ -53,11 +54,11 @@ class MinionRecyclerAdapter extends RecyclerView.Adapter<MinionViewHolder> {
         }
     }
 
-    void setGroupListener(@Nullable GroupListener groupListener) {
+    public void setGroupListener(@Nullable GroupListener groupListener) {
         this.groupListener = groupListener;
     }
 
-    void setRecordListener(@Nullable RecordListener recordListener) {
+    public void setRecordListener(@Nullable RecordListener recordListener) {
         this.recordListener = recordListener;
     }
 
@@ -72,8 +73,9 @@ class MinionRecyclerAdapter extends RecyclerView.Adapter<MinionViewHolder> {
             case TYPE_RECORD:
                 view = layoutInflater.inflate(R.layout.record_item, parent, false);
                 return new RecordViewHolder(view, recordListener);
+            default:
+                throw new IllegalArgumentException(String.format("Type %d is not supported", viewType));
         }
-        throw new IllegalArgumentException(String.format("Type %d is not supported", viewType));
     }
 
     @Override

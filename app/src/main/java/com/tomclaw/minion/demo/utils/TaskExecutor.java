@@ -15,7 +15,7 @@ public class TaskExecutor {
 
     private static class Holder {
 
-        static TaskExecutor instance = new TaskExecutor();
+        private static TaskExecutor instance = new TaskExecutor();
     }
 
     public static TaskExecutor getInstance() {

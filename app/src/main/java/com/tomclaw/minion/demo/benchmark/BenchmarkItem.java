@@ -6,7 +6,8 @@ import android.support.annotation.StringRes;
 /**
  * Created by solkin on 03.08.17.
  */
-class BenchmarkItem {
+@SuppressWarnings("WeakerAccess")
+public class BenchmarkItem {
 
     private int id;
 
@@ -16,7 +17,7 @@ class BenchmarkItem {
     private int progress;
     private String result;
 
-    BenchmarkItem(int id, @StringRes int title, int progress, @NonNull String result) {
+    public BenchmarkItem(int id, @StringRes int title, int progress, @NonNull String result) {
         this.id = id;
         this.title = title;
         this.progress = progress;
@@ -28,24 +29,24 @@ class BenchmarkItem {
     }
 
     @StringRes
-    int getTitle() {
+    public int getTitle() {
         return title;
     }
 
-    int getProgress() {
+    public int getProgress() {
         return progress;
     }
 
     @NonNull
-    String getResult() {
+    public String getResult() {
         return result;
     }
 
-    void setProgress(int progress) {
+    public void setProgress(int progress) {
         this.progress = progress;
     }
 
-    void setResult(@NonNull String result) {
+    public void setResult(@NonNull String result) {
         this.result = result;
     }
 }

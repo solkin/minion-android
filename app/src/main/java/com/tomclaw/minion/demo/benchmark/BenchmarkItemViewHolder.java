@@ -13,13 +13,14 @@ import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 /**
  * Created by solkin on 03.08.17.
  */
-class BenchmarkItemViewHolder extends RecyclerView.ViewHolder {
+@SuppressWarnings("WeakerAccess")
+public class BenchmarkItemViewHolder extends RecyclerView.ViewHolder {
 
     private TextView title;
     private MaterialProgressBar progress;
     private TextView result;
 
-    BenchmarkItemViewHolder(View itemView) {
+    public BenchmarkItemViewHolder(View itemView) {
         super(itemView);
         this.title = (TextView) itemView.findViewById(R.id.title);
         this.progress = (MaterialProgressBar) itemView.findViewById(R.id.progress);
@@ -29,7 +30,7 @@ class BenchmarkItemViewHolder extends RecyclerView.ViewHolder {
         progress.setIndeterminateDrawable(drawable);
     }
 
-    void bind(final BenchmarkItem item) {
+    public void bind(final BenchmarkItem item) {
         title.setText(item.getTitle());
         int value = item.getProgress();
         if (value > 0) {
