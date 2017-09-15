@@ -108,3 +108,24 @@ Minion allows to remove whole group of records too. Function `removeGroup` will 
 ```java
 IniGroup group = minion.removeGroup("music");
 ```
+
+### How it works
+Minion based on stupidly simple plain-text INI format, it parses, compiles and deliver access blazingly fast. 
+Library is extra-lightweight (~25Kb) and contain no any dependencies.
+You can use Minion to store some prefs or form-specific data. Simply than ever.
+
+
+### License
+    Copyright 2017 Igor Solkin
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
