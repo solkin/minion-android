@@ -9,15 +9,15 @@ import com.tomclaw.minion.demo.R;
 /**
  * Created by solkin on 09.08.17.
  */
-public class ItemsAccessBenchmarkTask extends BenchmarkTask {
+class ItemsAccessBenchmarkTask extends BenchmarkTask {
 
     private String name;
     private String[] keys;
     private int index;
 
-    public ItemsAccessBenchmarkTask(@NonNull Minion minion,
-                                    @NonNull BenchmarkRecyclerAdapter adapter,
-                                    @NonNull BenchmarkCallback callback) {
+    ItemsAccessBenchmarkTask(@NonNull Minion minion,
+                             @NonNull BenchmarkRecyclerAdapter adapter,
+                             @NonNull BenchmarkCallback callback) {
         super(minion, adapter, callback);
     }
 

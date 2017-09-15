@@ -70,8 +70,6 @@ public class CompileActivity extends AppCompatActivity implements GroupListener,
             String extra = getIntent().getStringExtra(EXTRA_INI_STRUCTURE);
             if (extra != null) {
                 bytesToStorage(extra.getBytes());
-            } else {
-                // Default state.
             }
         } else {
             final byte[] data = savedInstanceState.getByteArray(EXTRA_INI_STRUCTURE);
@@ -126,12 +124,12 @@ public class CompileActivity extends AppCompatActivity implements GroupListener,
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
-                break;
+                return true;
             case R.id.insert:
                 minion.getOrCreateGroup(generateRandomString());
                 adapter.setData(minion);
                 adapter.notifyDataSetChanged();
-                break;
+                return true;
             case R.id.compile:
                 minion.store();
                 try {
@@ -142,9 +140,10 @@ public class CompileActivity extends AppCompatActivity implements GroupListener,
                     finish();
                 } catch (IOException ignored) {
                 }
-                break;
+                return true;
+            default:
+                return false;
         }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override

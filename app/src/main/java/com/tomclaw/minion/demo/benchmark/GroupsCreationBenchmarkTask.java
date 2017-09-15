@@ -8,13 +8,13 @@ import com.tomclaw.minion.demo.R;
 /**
  * Created by solkin on 09.08.17.
  */
-public class GroupsCreationBenchmarkTask extends BenchmarkTask {
+class GroupsCreationBenchmarkTask extends BenchmarkTask {
 
     private int index;
 
-    public GroupsCreationBenchmarkTask(@NonNull Minion minion,
-                                       @NonNull BenchmarkRecyclerAdapter adapter,
-                                       @NonNull BenchmarkCallback callback) {
+    GroupsCreationBenchmarkTask(@NonNull Minion minion,
+                                @NonNull BenchmarkRecyclerAdapter adapter,
+                                @NonNull BenchmarkCallback callback) {
         super(minion, adapter, callback);
     }
 

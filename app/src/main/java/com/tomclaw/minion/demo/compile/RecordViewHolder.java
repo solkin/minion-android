@@ -12,7 +12,7 @@ import com.tomclaw.minion.demo.R;
 /**
  * Created by solkin on 03.09.17.
  */
-public class RecordViewHolder extends MinionViewHolder {
+class RecordViewHolder extends MinionViewHolder {
 
     private final
     @Nullable
@@ -28,7 +28,7 @@ public class RecordViewHolder extends MinionViewHolder {
     @NonNull
     View delete;
 
-    public RecordViewHolder(@NonNull View itemView, @Nullable RecordListener recordListener) {
+    RecordViewHolder(@NonNull View itemView, @Nullable RecordListener recordListener) {
         super(itemView);
         this.recordListener = recordListener;
         this.key = (TextView) itemView.findViewById(R.id.key);

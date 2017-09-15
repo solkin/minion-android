@@ -36,12 +36,12 @@ public class SectionItem {
     }
 
     @NonNull
-    public String getText() {
+    String getText() {
         return text;
     }
 
     @NonNull
-    public String getDescription() {
+    String getDescription() {
         return description;
     }
 }

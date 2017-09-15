@@ -6,7 +6,7 @@ import android.support.annotation.StringRes;
 /**
  * Created by solkin on 03.08.17.
  */
-public class BenchmarkItem {
+class BenchmarkItem {
 
     private int id;
 
@@ -16,7 +16,7 @@ public class BenchmarkItem {
     private int progress;
     private String result;
 
-    public BenchmarkItem(int id, @StringRes int title, int progress, @NonNull String result) {
+    BenchmarkItem(int id, @StringRes int title, int progress, @NonNull String result) {
         this.id = id;
         this.title = title;
         this.progress = progress;
@@ -27,27 +27,25 @@ public class BenchmarkItem {
         return id;
     }
 
-    public
     @StringRes
     int getTitle() {
         return title;
     }
 
-    public int getProgress() {
+    int getProgress() {
         return progress;
     }
 
-    public
     @NonNull
     String getResult() {
         return result;
     }
 
-    public void setProgress(int progress) {
+    void setProgress(int progress) {
         this.progress = progress;
     }
 
-    public void setResult(@NonNull String result) {
+    void setResult(@NonNull String result) {
         this.result = result;
     }
 }

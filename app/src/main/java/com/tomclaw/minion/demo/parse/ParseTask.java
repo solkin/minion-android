@@ -1,7 +1,6 @@
 package com.tomclaw.minion.demo.parse;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -15,7 +14,6 @@ import com.tomclaw.minion.demo.utils.PleaseWaitTask;
 import com.tomclaw.minion.storage.MemoryStorage;
 import com.tomclaw.minion.storage.Readable;
 import com.tomclaw.minion.storage.StringStorage;
-import com.tomclaw.minion.storage.Writable;
 
 import java.io.IOException;
 import java.util.Set;
@@ -25,7 +23,7 @@ import static com.tomclaw.minion.StreamHelper.readFully;
 /**
  * Created by solkin on 30.08.17.
  */
-public class ParseTask extends PleaseWaitTask<Activity> {
+class ParseTask extends PleaseWaitTask<Activity> {
 
     @NonNull
     private final String data;
@@ -36,7 +34,7 @@ public class ParseTask extends PleaseWaitTask<Activity> {
     private @Nullable
     MemoryStorage storage;
 
-    public ParseTask(@NonNull Activity activity, @NonNull String data) {
+    ParseTask(@NonNull Activity activity, @NonNull String data) {
         super(activity);
         this.data = data;
     }

@@ -15,14 +15,12 @@ import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
  */
 class BenchmarkItemViewHolder extends RecyclerView.ViewHolder {
 
-    private View itemView;
     private TextView title;
     private MaterialProgressBar progress;
     private TextView result;
 
-    public BenchmarkItemViewHolder(View itemView) {
+    BenchmarkItemViewHolder(View itemView) {
         super(itemView);
-        this.itemView = itemView;
         this.title = (TextView) itemView.findViewById(R.id.title);
         this.progress = (MaterialProgressBar) itemView.findViewById(R.id.progress);
         this.result = (TextView) itemView.findViewById(R.id.result);
@@ -31,7 +29,7 @@ class BenchmarkItemViewHolder extends RecyclerView.ViewHolder {
         progress.setIndeterminateDrawable(drawable);
     }
 
-    public void bind(final BenchmarkItem item) {
+    void bind(final BenchmarkItem item) {
         title.setText(item.getTitle());
         int value = item.getProgress();
         if (value > 0) {

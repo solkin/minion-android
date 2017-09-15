@@ -8,14 +8,14 @@ import com.tomclaw.minion.demo.R;
 /**
  * Created by solkin on 09.08.17.
  */
-public class GroupsAccessBenchmarkTask extends BenchmarkTask {
+class GroupsAccessBenchmarkTask extends BenchmarkTask {
 
     private String[] names;
     private int index;
 
-    public GroupsAccessBenchmarkTask(@NonNull Minion minion,
-                                     @NonNull BenchmarkRecyclerAdapter adapter,
-                                     @NonNull BenchmarkCallback callback) {
+    GroupsAccessBenchmarkTask(@NonNull Minion minion,
+                              @NonNull BenchmarkRecyclerAdapter adapter,
+                              @NonNull BenchmarkCallback callback) {
         super(minion, adapter, callback);
     }
 

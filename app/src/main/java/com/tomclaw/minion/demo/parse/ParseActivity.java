@@ -81,15 +81,16 @@ public class ParseActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
-                break;
+                return true;
             case R.id.parse:
                 if (input != null) {
                     String data = input.getText().toString();
                     Task parseTask = new ParseTask(this, data);
                     TaskExecutor.getInstance().execute(parseTask);
                 }
-                break;
+                return true;
+            default:
+                return false;
         }
-        return super.onOptionsItemSelected(item);
     }
 }

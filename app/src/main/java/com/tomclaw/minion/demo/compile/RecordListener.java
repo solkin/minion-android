@@ -6,7 +6,7 @@ import com.tomclaw.minion.IniRecord;
 /**
  * Created by solkin on 03.09.17.
  */
-public interface RecordListener {
+interface RecordListener {
 
     void onDeleteRecord(IniGroup group, IniRecord record);
 

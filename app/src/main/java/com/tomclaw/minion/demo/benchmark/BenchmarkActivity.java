@@ -61,9 +61,10 @@ public class BenchmarkActivity extends AppCompatActivity implements BenchmarkTas
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
-                break;
+                return true;
+            default:
+                return false;
         }
-        return super.onOptionsItemSelected(item);
     }
 
     private void prepareMinion() {

@@ -12,7 +12,7 @@ import com.tomclaw.minion.demo.R;
 /**
  * Created by solkin on 03.09.17.
  */
-public class GroupViewHolder extends MinionViewHolder {
+class GroupViewHolder extends MinionViewHolder {
 
     private final
     @Nullable
@@ -31,7 +31,7 @@ public class GroupViewHolder extends MinionViewHolder {
     @NonNull
     View delete;
 
-    public GroupViewHolder(@NonNull View itemView, @Nullable GroupListener groupListener) {
+    GroupViewHolder(@NonNull View itemView, @Nullable GroupListener groupListener) {
         super(itemView);
         this.groupListener = groupListener;
         this.name = (TextView) itemView.findViewById(R.id.name);

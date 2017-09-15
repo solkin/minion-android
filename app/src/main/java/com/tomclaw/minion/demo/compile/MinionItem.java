@@ -9,36 +9,36 @@ import com.tomclaw.minion.IniRecord;
 /**
  * Created by solkin on 03.09.17.
  */
-public class MinionItem {
+class MinionItem {
 
+    @NonNull
     private final
-    @Nullable
     IniGroup group;
     private final
     @Nullable
     IniRecord record;
 
-    public MinionItem(@NonNull IniGroup group) {
+    MinionItem(@NonNull IniGroup group) {
         this.group = group;
         this.record = null;
     }
 
-    public MinionItem(@NonNull IniGroup group, @NonNull IniRecord record) {
+    MinionItem(@NonNull IniGroup group, @NonNull IniRecord record) {
         this.group = group;
         this.record = record;
     }
 
-    public boolean isGroup() {
+    boolean isGroup() {
         return record == null;
     }
 
     @Nullable
-    public IniGroup getGroup() {
+    IniGroup getGroup() {
         return group;
     }
 
     @Nullable
-    public IniRecord getRecord() {
+    IniRecord getRecord() {
         return record;
     }
 }

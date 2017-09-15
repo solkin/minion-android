@@ -7,10 +7,9 @@ import android.view.View;
 /**
  * Created by solkin on 03.09.17.
  */
+abstract class MinionViewHolder extends RecyclerView.ViewHolder {
 
-public abstract class MinionViewHolder extends RecyclerView.ViewHolder {
-
-    public MinionViewHolder(@NonNull View itemView) {
+    MinionViewHolder(@NonNull View itemView) {
         super(itemView);
     }
 

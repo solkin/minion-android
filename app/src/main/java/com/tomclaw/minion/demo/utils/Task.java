@@ -6,6 +6,7 @@ package com.tomclaw.minion.demo.utils;
  * Date: 31.10.13
  * Time: 11:08
  */
+@SuppressWarnings("WeakerAccess")
 public abstract class Task implements Runnable {
 
     @Override

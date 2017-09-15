@@ -14,25 +14,20 @@ import java.util.List;
 /**
  * Created by solkin on 03.08.17.
  */
-public class BenchmarkRecyclerAdapter extends RecyclerView.Adapter<BenchmarkItemViewHolder> {
+class BenchmarkRecyclerAdapter extends RecyclerView.Adapter<BenchmarkItemViewHolder> {
 
     private final Context context;
     private final List<BenchmarkItem> list;
 
-    public BenchmarkRecyclerAdapter(Context context) {
+    BenchmarkRecyclerAdapter(Context context) {
         this.context = context;
         this.list = new ArrayList<>();
         setHasStableIds(true);
     }
 
-    public int appendItem(BenchmarkItem item) {
+    int appendItem(BenchmarkItem item) {
         list.add(item);
         return list.size() - 1;
-    }
-
-    public void setItems(List<BenchmarkItem> items) {
-        list.clear();
-        list.addAll(items);
     }
 
     @Override

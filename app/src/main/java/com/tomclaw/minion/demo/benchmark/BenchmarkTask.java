@@ -12,13 +12,12 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by solkin on 09.08.17.
  */
-public abstract class BenchmarkTask extends Task {
+abstract class BenchmarkTask extends Task {
 
     private static final long DEBOUNCE_DELAY = 500;
     private
     @NonNull
     BenchmarkItem benchmarkItem;
-    private int position;
     private Minion minion;
     private
     @NonNull
@@ -30,9 +29,9 @@ public abstract class BenchmarkTask extends Task {
     private
     AdapterUpdater adapterUpdater;
 
-    public BenchmarkTask(@NonNull Minion minion,
-                         @NonNull BenchmarkRecyclerAdapter adapter,
-                         @NonNull BenchmarkCallback callback) {
+    BenchmarkTask(@NonNull Minion minion,
+                  @NonNull BenchmarkRecyclerAdapter adapter,
+                  @NonNull BenchmarkCallback callback) {
         this.minion = minion;
         this.adapter = adapter;
         this.callback = callback;
@@ -46,7 +45,7 @@ public abstract class BenchmarkTask extends Task {
 
     @Override
     public final void onPreExecuteMain() {
-        position = adapter.appendItem(benchmarkItem);
+        int position = adapter.appendItem(benchmarkItem);
         adapterUpdater = new AdapterUpdater(adapter, position);
         adapter.notifyItemInserted(position);
     }
@@ -94,15 +93,15 @@ public abstract class BenchmarkTask extends Task {
 
     protected abstract void runTest(Minion minion);
 
-    public void setProgress(int progress) {
+    private void setProgress(int progress) {
         benchmarkItem.setProgress(progress);
     }
 
-    public void setResult(@NonNull String result) {
+    private void setResult(@NonNull String result) {
         benchmarkItem.setResult(result);
     }
 
-    void updateItem() {
+    private void updateItem() {
         if (System.currentTimeMillis() - lastUpdateTime > DEBOUNCE_DELAY) {
             updateItemInternal();
             lastUpdateTime = System.currentTimeMillis();
@@ -135,7 +134,7 @@ public abstract class BenchmarkTask extends Task {
         }
     }
 
-    public interface BenchmarkCallback {
+    interface BenchmarkCallback {
 
         void onComplete(int id);
 

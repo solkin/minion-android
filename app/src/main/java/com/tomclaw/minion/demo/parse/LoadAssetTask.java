@@ -13,13 +13,13 @@ import java.io.InputStreamReader;
 /**
  * Created by solkin on 30.08.17.
  */
-public class LoadAssetTask extends WeakObjectTask<EditText> {
+class LoadAssetTask extends WeakObjectTask<EditText> {
 
     private final
     @NonNull
     StringBuilder total;
 
-    public LoadAssetTask(EditText object) {
+    LoadAssetTask(EditText object) {
         super(object);
         total = new StringBuilder();
     }

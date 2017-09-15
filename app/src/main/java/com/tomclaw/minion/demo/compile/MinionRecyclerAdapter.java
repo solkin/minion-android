@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * Created by solkin on 03.09.17.
  */
-public class MinionRecyclerAdapter extends RecyclerView.Adapter<MinionViewHolder> {
+class MinionRecyclerAdapter extends RecyclerView.Adapter<MinionViewHolder> {
 
     private static final int TYPE_GROUP = 0x01;
     private static final int TYPE_RECORD = 0x02;
@@ -29,7 +29,6 @@ public class MinionRecyclerAdapter extends RecyclerView.Adapter<MinionViewHolder
     @NonNull
     List<MinionItem> items;
 
-    private Context context;
     private LayoutInflater layoutInflater;
 
     private
@@ -39,8 +38,7 @@ public class MinionRecyclerAdapter extends RecyclerView.Adapter<MinionViewHolder
     @Nullable
     RecordListener recordListener;
 
-    public MinionRecyclerAdapter(Context context) {
-        this.context = context;
+    MinionRecyclerAdapter(Context context) {
         this.layoutInflater = LayoutInflater.from(context);
         items = new ArrayList<>();
     }
@@ -55,11 +53,11 @@ public class MinionRecyclerAdapter extends RecyclerView.Adapter<MinionViewHolder
         }
     }
 
-    public void setGroupListener(@Nullable GroupListener groupListener) {
+    void setGroupListener(@Nullable GroupListener groupListener) {
         this.groupListener = groupListener;
     }
 
-    public void setRecordListener(@Nullable RecordListener recordListener) {
+    void setRecordListener(@Nullable RecordListener recordListener) {
         this.recordListener = recordListener;
     }
 

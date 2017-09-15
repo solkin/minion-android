@@ -10,7 +10,7 @@ import java.util.Random;
  */
 public class StringUtil {
 
-    public static Random random;
+    private static Random random;
 
     static {
         random = new Random(System.currentTimeMillis());
