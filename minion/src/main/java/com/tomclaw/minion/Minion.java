@@ -26,9 +26,11 @@ import static com.tomclaw.minion.StringHelper.join;
 /**
  * Created by solkin on 27.07.17.
  */
+@SuppressWarnings("WeakerAccess")
 public class Minion {
 
-    private static final String DEFAULT_GROUP_NAME = "";
+    public static final String DEFAULT_GROUP_NAME = "";
+    
     private static final String COMMENT_START_UNIX = "#";
     private static final String COMMENT_START_WINDOWS = ";";
     private static final String GROUP_START = "[";
@@ -63,7 +65,15 @@ public class Minion {
     @Nullable
     String getValue(@NonNull String name,
                     @NonNull String key) {
-        String value = null;
+        return getValue(name, key, null);
+    }
+
+    public
+    @Nullable
+    String getValue(@NonNull String name,
+                    @NonNull String key,
+                    @Nullable String defValue) {
+        String value = defValue;
         IniGroup group = getOrCreateGroup(name);
         IniRecord record = group.getRecord(key);
         if (record != null && record.isArrayValue()) {
@@ -75,8 +85,16 @@ public class Minion {
     public
     @Nullable
     String[] getValues(@NonNull String name,
-                           @NonNull String key) {
-        String[] value = null;
+                       @NonNull String key) {
+        return getValues(name, key, null);
+    }
+
+    public
+    @Nullable
+    String[] getValues(@NonNull String name,
+                       @NonNull String key,
+                       @Nullable String[] defValue) {
+        String[] value = defValue;
         IniGroup group = getOrCreateGroup(name);
         IniRecord record = group.getRecord(key);
         if (record != null) {

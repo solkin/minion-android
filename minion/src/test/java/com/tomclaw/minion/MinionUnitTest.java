@@ -194,23 +194,52 @@ public class MinionUnitTest {
     }
 
     @Test
-    public void getValue_getsValueCorrectly() {
+    public void getValue_getsValueCorrectly_noDefaultValue() {
         String name = "test_group";
         String key = "test_key";
-        String value1 = "test_value";
+        String value = "test_value";
+        MemoryStorage storage = MemoryStorage.create();
+        Minion minion = Minion.lets()
+                .load(storage)
+                .sync();
+        minion.setValue(name, key, value);
+
+        String resultValue = minion.getValue(name, key);
+
+        assertEquals(resultValue, value);
+    }
+
+    @Test
+    public void getValue_returnsNull_noSuchRecordAndNoDefaultValue() {
+        String name = "test_group";
+        String key = "test_key";
         MemoryStorage storage = MemoryStorage.create();
         Minion minion = Minion.lets()
                 .load(storage)
                 .sync();
 
-        minion.setValue(name, key, value1);
-
         String resultValue = minion.getValue(name, key);
-        assertEquals(resultValue, value1);
+
+        assertNull(resultValue);
     }
 
     @Test
-    public void getValues_getsValuesCorrectly() {
+    public void getValue_returnsDefaultValue_noSuchRecordButDefaultValueSpecified() {
+        String name = "test_group";
+        String key = "test_key";
+        String defValue = "test_def_value";
+        MemoryStorage storage = MemoryStorage.create();
+        Minion minion = Minion.lets()
+                .load(storage)
+                .sync();
+
+        String resultValue = minion.getValue(name, key, defValue);
+
+        assertEquals(resultValue, defValue);
+    }
+
+    @Test
+    public void getValues_getsValuesCorrectly_noDefaultValue() {
         String name = "test_group";
         String key = "test_key";
         String value1 = "test_value1";
@@ -220,11 +249,40 @@ public class MinionUnitTest {
         Minion minion = Minion.lets()
                 .load(storage)
                 .sync();
-
         minion.setValue(name, key, value1, value2, value3);
 
         String[] resultValue = minion.getValues(name, key);
+
         assertArrayEquals(resultValue, new String[]{value1, value2, value3});
+    }
+
+    @Test
+    public void getValues_returnsNull_noSuchRecordsAndNoDefaultValue() {
+        String name = "test_group";
+        String key = "test_key";
+        MemoryStorage storage = MemoryStorage.create();
+        Minion minion = Minion.lets()
+                .load(storage)
+                .sync();
+
+        String[] resultValue = minion.getValues(name, key);
+
+        assertNull(resultValue);
+    }
+
+    @Test
+    public void getValues_returnsDefaultValue_noSuchRecordButDefaultValueSpecified() {
+        String name = "test_group";
+        String key = "test_key";
+        String[] defValue = new String[]{"test_value1", "test_value2", "test_value3"};
+        MemoryStorage storage = MemoryStorage.create();
+        Minion minion = Minion.lets()
+                .load(storage)
+                .sync();
+
+        String[] resultValue = minion.getValues(name, key, defValue);
+
+        assertArrayEquals(resultValue, defValue);
     }
 
     private byte[] readFully(Readable readable) throws IOException {
