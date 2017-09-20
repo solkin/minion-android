@@ -39,7 +39,7 @@ public class IniRecord {
     }
 
     private void trimValues() {
-        for (int c = 0;c< value.length;c++) {
+        for (int c = 0; c < value.length; c++) {
             value[c] = value[c].trim();
         }
     }

@@ -31,7 +31,8 @@ class ParseTask extends PleaseWaitTask<Activity> {
     @Nullable
     Minion minion;
     private long delay;
-    private @Nullable
+    private
+    @Nullable
     MemoryStorage storage;
 
     ParseTask(@NonNull Activity activity, @NonNull String data) {

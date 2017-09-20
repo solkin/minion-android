@@ -30,7 +30,7 @@ import static com.tomclaw.minion.StringHelper.join;
 public class Minion {
 
     public static final String DEFAULT_GROUP_NAME = "";
-    
+
     private static final String COMMENT_START_UNIX = "#";
     private static final String COMMENT_START_WINDOWS = ";";
     private static final String GROUP_START = "[";
