@@ -18,8 +18,7 @@ public class IniRecord {
 
     protected IniRecord(@NonNull String key, @NonNull String... value) {
         this.key = key.trim();
-        this.value = value;
-        trimValues();
+        setValue(value);
     }
 
     public
@@ -30,11 +29,25 @@ public class IniRecord {
 
     public
     @NonNull
-    String[] getValue() {
+    String[] getValues() {
         return value;
     }
 
-    public boolean isArrayValue() {
+    public
+    @NonNull
+    String getValue() {
+        if (!hasValue()) {
+            throw new IllegalStateException("IniRecord with key " + key + " has no value");
+        }
+        return value[0];
+    }
+
+    public void setValue(@NonNull String... value) {
+        this.value = value;
+        trimValues();
+    }
+
+    public boolean hasValue() {
         return value.length > 0;
     }
 

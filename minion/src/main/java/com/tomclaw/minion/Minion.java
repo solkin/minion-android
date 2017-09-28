@@ -76,8 +76,8 @@ public class Minion {
         String value = defValue;
         IniGroup group = getOrCreateGroup(name);
         IniRecord record = group.getRecord(key);
-        if (record != null && record.isArrayValue()) {
-            value = record.getValue()[0];
+        if (record != null && record.hasValue()) {
+            value = record.getValue();
         }
         return value;
     }
@@ -98,7 +98,7 @@ public class Minion {
         IniGroup group = getOrCreateGroup(name);
         IniRecord record = group.getRecord(key);
         if (record != null) {
-            value = record.getValue();
+            value = record.getValues();
         }
         return value;
     }
@@ -201,7 +201,7 @@ public class Minion {
                 writer.write(GROUP_START + group.getName() + GROUP_END);
                 isEmpty = false;
                 for (IniRecord record : group.getRecords()) {
-                    String value = join(ARRAY_VALUE_DELIMITER, record.getValue());
+                    String value = join(ARRAY_VALUE_DELIMITER, record.getValues());
                     writer.newLine();
                     writer.write(record.getKey() + KEY_VALUE_DIVIDER + value);
                 }
