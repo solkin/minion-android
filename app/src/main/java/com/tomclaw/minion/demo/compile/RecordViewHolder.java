@@ -45,7 +45,7 @@ class RecordViewHolder extends MinionViewHolder {
         }
         key.setText(record.getKey());
         StringBuilder builder = new StringBuilder();
-        for (String value : record.getValue()) {
+        for (String value : record.getValues()) {
             if (builder.length() > 0) {
                 builder.append(", ");
             }
