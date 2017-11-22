@@ -24,7 +24,7 @@ public class MinionSharedPreferences implements SharedPreferences {
 
     @Override
     public Map<String, ?> getAll() {
-        Map<String, Object> values = new LinkedHashMap<>() ;
+        Map<String, Object> values = new LinkedHashMap<>();
         for (IniRecord record : minion.getOrCreateGroup(PREF_GROUP_NAME).getRecords()) {
             if (record.getValues().length > 1) {
                 values.put(record.getKey(), record.getValues());
@@ -79,16 +79,81 @@ public class MinionSharedPreferences implements SharedPreferences {
 
     @Override
     public Editor edit() {
-        return null;
+        return new MinionEditor();
     }
 
     @Override
     public void registerOnSharedPreferenceChangeListener(OnSharedPreferenceChangeListener onSharedPreferenceChangeListener) {
-
+        throw new UnsupportedOperationException("not implemented yet");
     }
 
     @Override
     public void unregisterOnSharedPreferenceChangeListener(OnSharedPreferenceChangeListener onSharedPreferenceChangeListener) {
+        throw new UnsupportedOperationException("not implemented yet");
+    }
 
+    public class MinionEditor implements Editor {
+
+        @Override
+        public Editor putString(String key, @Nullable String value) {
+            minion.setValue(PREF_GROUP_NAME, key, value);
+            return this;
+        }
+
+        @Override
+        public Editor putStringSet(String key, @Nullable Set<String> value) {
+            if (value != null) {
+                String[] values = value.toArray(new String[0]);
+                minion.setValue(PREF_GROUP_NAME, key, values);
+            }
+            return this;
+        }
+
+        @Override
+        public Editor putInt(String key, int value) {
+            minion.setValue(PREF_GROUP_NAME, key, Integer.toString(value));
+            return this;
+        }
+
+        @Override
+        public Editor putLong(String key, long value) {
+            minion.setValue(PREF_GROUP_NAME, key, Long.toString(value));
+            return this;
+        }
+
+        @Override
+        public Editor putFloat(String key, float value) {
+            minion.setValue(PREF_GROUP_NAME, key, Float.toString(value));
+            return this;
+        }
+
+        @Override
+        public Editor putBoolean(String key, boolean value) {
+            minion.setValue(PREF_GROUP_NAME, key, Boolean.toString(value));
+            return this;
+        }
+
+        @Override
+        public Editor remove(String key) {
+            minion.removeRecord(PREF_GROUP_NAME, key);
+            return this;
+        }
+
+        @Override
+        public Editor clear() {
+            minion.getGroups();
+            return this;
+        }
+
+        @Override
+        public boolean commit() {
+            minion.store();
+            return true;
+        }
+
+        @Override
+        public void apply() {
+            minion.store();
+        }
     }
 }

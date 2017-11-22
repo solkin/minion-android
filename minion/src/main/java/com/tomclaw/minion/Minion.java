@@ -52,27 +52,24 @@ public class Minion {
         this.async = async;
     }
 
-    public
     @Nullable
-    IniRecord setValue(@NonNull String name,
-                       @NonNull String key,
-                       @NonNull String... value) {
+    public IniRecord setValue(@NonNull String name,
+                              @NonNull String key,
+                              @NonNull String... value) {
         IniGroup group = getOrCreateGroup(name);
         return group.getOrCreateRecord(key, value);
     }
 
-    public
     @Nullable
-    String getValue(@NonNull String name,
-                    @NonNull String key) {
+    public String getValue(@NonNull String name,
+                           @NonNull String key) {
         return getValue(name, key, null);
     }
 
-    public
     @Nullable
-    String getValue(@NonNull String name,
-                    @NonNull String key,
-                    @Nullable String defValue) {
+    public String getValue(@NonNull String name,
+                           @NonNull String key,
+                           @Nullable String defValue) {
         String value = defValue;
         IniGroup group = getOrCreateGroup(name);
         IniRecord record = group.getRecord(key);
@@ -82,18 +79,16 @@ public class Minion {
         return value;
     }
 
-    public
     @Nullable
-    String[] getValues(@NonNull String name,
-                       @NonNull String key) {
+    public String[] getValues(@NonNull String name,
+                              @NonNull String key) {
         return getValues(name, key, null);
     }
 
-    public
     @Nullable
-    String[] getValues(@NonNull String name,
-                       @NonNull String key,
-                       @Nullable String[] defValue) {
+    public String[] getValues(@NonNull String name,
+                              @NonNull String key,
+                              @Nullable String[] defValue) {
         String[] value = defValue;
         IniGroup group = getOrCreateGroup(name);
         IniRecord record = group.getRecord(key);
@@ -103,9 +98,8 @@ public class Minion {
         return value;
     }
 
-    public
     @NonNull
-    IniGroup getOrCreateGroup(@NonNull String name) {
+    public IniGroup getOrCreateGroup(@NonNull String name) {
         synchronized (groups) {
             IniGroup group = getGroup(name);
             if (group == null) {
@@ -115,21 +109,18 @@ public class Minion {
         }
     }
 
-    public
     @Nullable
-    IniGroup getGroup(@NonNull String name) {
+    public IniGroup getGroup(@NonNull String name) {
         return groups.get(name);
     }
 
-    public
     @NonNull
-    Set<String> getGroupNames() {
+    public Set<String> getGroupNames() {
         return Collections.unmodifiableSet(groups.keySet());
     }
 
-    public
     @NonNull
-    Collection<IniGroup> getGroups() {
+    public Collection<IniGroup> getGroups() {
         return Collections.unmodifiableCollection(groups.values());
     }
 
@@ -137,28 +128,29 @@ public class Minion {
         return groups.size();
     }
 
-    private
     @NonNull
-    IniGroup addGroup(String name) {
+    private IniGroup addGroup(String name) {
         IniGroup group = new IniGroup(name);
         groups.put(group.getName(), group);
         return group;
     }
 
-    public
     @Nullable
-    IniGroup removeGroup(String name) {
+    public IniGroup removeGroup(String name) {
         return groups.remove(name);
     }
 
-    public
     @Nullable
-    IniRecord removeRecord(String name, String key) {
+    public IniRecord removeRecord(String name, String key) {
         IniGroup group = getGroup(name);
         if (group != null) {
             return group.removeRecord(key);
         }
         return null;
+    }
+
+    public void clear() {
+        groups.clear();
     }
 
     public void store() {

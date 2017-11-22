@@ -144,6 +144,22 @@ public class MinionUnitTest {
     }
 
     @Test
+    public void clear_removeAllGroups() {
+        MemoryStorage storage = MemoryStorage.create();
+        Minion minion = Minion.lets()
+                .load(storage)
+                .sync();
+        minion.getOrCreateGroup("test_group1");
+        minion.getOrCreateGroup("test_group2");
+        minion.getOrCreateGroup("test_group3");
+
+        minion.clear();
+
+        int groupsCount = minion.getGroupsCount();
+        assertEquals(groupsCount, 0);
+    }
+
+    @Test
     public void setValue_setsValueCorrectly() {
         String name = "test_group";
         String key = "test_key";
