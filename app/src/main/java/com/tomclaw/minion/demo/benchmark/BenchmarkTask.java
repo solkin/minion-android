@@ -15,19 +15,15 @@ import java.util.concurrent.TimeUnit;
 abstract class BenchmarkTask extends Task {
 
     private static final long DEBOUNCE_DELAY = 500;
-    private
     @NonNull
-    BenchmarkItem benchmarkItem;
+    private BenchmarkItem benchmarkItem;
     private Minion minion;
-    private
     @NonNull
-    BenchmarkRecyclerAdapter adapter;
-    private
+    private BenchmarkRecyclerAdapter adapter;
     @NonNull
-    BenchmarkCallback callback;
+    private BenchmarkCallback callback;
     private long lastUpdateTime;
-    private
-    AdapterUpdater adapterUpdater;
+    private AdapterUpdater adapterUpdater;
 
     BenchmarkTask(@NonNull Minion minion,
                   @NonNull BenchmarkRecyclerAdapter adapter,
@@ -63,9 +59,8 @@ abstract class BenchmarkTask extends Task {
 
     protected abstract int getId();
 
-    protected abstract
     @StringRes
-    int getTitle();
+    protected abstract int getTitle();
 
     protected abstract int getTestsCount();
 
@@ -118,9 +113,8 @@ abstract class BenchmarkTask extends Task {
 
     private static class AdapterUpdater implements Runnable {
 
-        private
         @NonNull
-        BenchmarkRecyclerAdapter adapter;
+        private BenchmarkRecyclerAdapter adapter;
         private int position;
 
         private AdapterUpdater(@NonNull BenchmarkRecyclerAdapter adapter, int position) {

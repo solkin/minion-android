@@ -14,12 +14,10 @@ import java.util.Map;
 @SuppressWarnings("WeakerAccess")
 public class IniGroup {
 
-    private final
     @NonNull
-    String name;
-    private final
+    private final String name;
     @NonNull
-    Map<String, IniRecord> records;
+    private final Map<String, IniRecord> records;
 
     protected IniGroup(@NonNull String name) {
         this(name, new LinkedHashMap<String, IniRecord>());
@@ -30,15 +28,13 @@ public class IniGroup {
         this.records = records;
     }
 
-    public
     @NonNull
-    String getName() {
+    public String getName() {
         return name;
     }
 
-    public
     @NonNull
-    IniRecord getOrCreateRecord(String key, String... value) {
+    public IniRecord getOrCreateRecord(String key, String... value) {
         String trimmedKey = key.trim();
         synchronized (records) {
             IniRecord record = getRecord(trimmedKey);
@@ -49,9 +45,8 @@ public class IniGroup {
         }
     }
 
-    public
     @Nullable
-    IniRecord getRecord(String key) {
+    public IniRecord getRecord(String key) {
         return records.get(key);
     }
 
@@ -63,15 +58,13 @@ public class IniGroup {
         return records.size();
     }
 
-    public
     @Nullable
-    IniRecord removeRecord(String key) {
+    public IniRecord removeRecord(String key) {
         return records.remove(key);
     }
 
-    private
     @NonNull
-    IniRecord addRecord(String key, String... value) {
+    private IniRecord addRecord(String key, String... value) {
         IniRecord record = new IniRecord(key, value);
         records.put(record.getKey(), record);
         return record;

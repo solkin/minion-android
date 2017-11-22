@@ -25,4 +25,5 @@ public class StringStorage implements Readable {
     public static StringStorage create(String string) {
         return new StringStorage(string);
     }
+
 }

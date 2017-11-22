@@ -9,33 +9,28 @@ import java.util.Arrays;
  */
 public class IniRecord {
 
-    private
     @NonNull
-    final String key;
-    private
+    private final String key;
     @NonNull
-    String[] value;
+    private String[] value;
 
     protected IniRecord(@NonNull String key, @NonNull String... value) {
         this.key = key.trim();
         setValue(value);
     }
 
-    public
     @NonNull
-    String getKey() {
+    public String getKey() {
         return key;
     }
 
-    public
     @NonNull
-    String[] getValues() {
+    public String[] getValues() {
         return value;
     }
 
-    public
     @NonNull
-    String getValue() {
+    public String getValue() {
         if (!hasValue()) {
             throw new IllegalStateException("IniRecord with key " + key + " has no value");
         }

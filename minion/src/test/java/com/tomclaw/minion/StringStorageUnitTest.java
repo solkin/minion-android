@@ -25,4 +25,5 @@ public class StringStorageUnitTest {
     private StringStorage createStringStorage(String data) {
         return StringStorage.create(data);
     }
+
 }
