@@ -114,6 +114,13 @@ Minion allows to remove whole group of records too. Function `removeGroup` will 
 IniGroup group = minion.removeGroup("music");
 ```
 
+### Clear all
+If you need to remove all groups (and, aloso, all records), you can call method `clear`:
+
+```java
+minion.clear();
+```
+
 ### How it works
 Minion based on stupidly simple plain-text INI format, it parses, compiles and deliver access blazingly fast. 
 Library is extra-lightweight (~25Kb) and contain no any dependencies.
