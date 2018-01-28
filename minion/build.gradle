@@ -1,21 +1,13 @@
 apply plugin: 'com.android.library'
 
 android {
-    signingConfigs {
-        release {
-            if (project.hasProperty("storeFile")) storeFile file("$rootDir/" + project.storeFile)
-            if (project.hasProperty("storePassword")) storePassword project.storePassword
-            if (project.hasProperty("keyAlias")) keyAlias project.keyAlias
-            if (project.hasProperty("keyPassword")) keyPassword project.keyPassword
-        }
-    }
     compileSdkVersion 26
     buildToolsVersion '26.0.2'
 
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 26
-        versionCode project.hasProperty("versionCode") ? Integer.parseInt(project.versionCode) : 1
+        versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -25,7 +17,6 @@ android {
         release {
             minifyEnabled true
             shrinkResources true
-            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
