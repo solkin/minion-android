@@ -21,4 +21,4 @@ licenses:
 before_script:
     - chmod +x gradlew
 
-script: ./gradlew test
+script: ./gradlew test dependencies || true
