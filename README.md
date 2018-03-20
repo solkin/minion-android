@@ -84,7 +84,7 @@ String name = minion.getValue("user", "name");
 Or you can obtain array of values.
 
 ```java
-String[] genres = genresminion.getValues("music", "genres");
+String[] genres = minion.getValues("music", "genres");
 ```
 
 ### Get all groups
@@ -115,7 +115,7 @@ IniGroup group = minion.removeGroup("music");
 ```
 
 ### Clear all
-If you need to remove all groups (and, aloso, all records), you can call method `clear`:
+If you need to remove all groups (and, also, all records), you can call method `clear`:
 
 ```java
 minion.clear();
