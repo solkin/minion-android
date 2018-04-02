@@ -128,7 +128,7 @@ You can use Minion to store some prefs or form-specific data. Simply than ever.
 
 
 ### License
-    Copyright 2017 Igor Solkin
+    Copyright 2018 Igor Solkin
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
