@@ -1,7 +1,7 @@
 package com.tomclaw.minion.demo.benchmark;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.StringRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
 
 /**
  * Created by solkin on 03.08.17.

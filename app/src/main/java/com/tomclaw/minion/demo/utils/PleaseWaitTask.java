@@ -2,8 +2,8 @@ package com.tomclaw.minion.demo.utils;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.StringRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
 
 import java.lang.ref.WeakReference;
 

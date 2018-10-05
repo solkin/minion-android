@@ -1,6 +1,6 @@
 package com.tomclaw.minion.demo.benchmark;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.tomclaw.minion.IniGroup;
 import com.tomclaw.minion.Minion;

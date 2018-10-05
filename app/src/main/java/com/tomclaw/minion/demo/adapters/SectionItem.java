@@ -1,7 +1,7 @@
 package com.tomclaw.minion.demo.adapters;
 
-import android.support.annotation.DrawableRes;
-import android.support.annotation.NonNull;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
 
 /**
  * Created by solkin on 03.08.17.
