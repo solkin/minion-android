@@ -30,13 +30,13 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         SectionsRecyclerAdapter adapter = new SectionsRecyclerAdapter(this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,
-                LinearLayoutManager.VERTICAL, false);
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler);
+                RecyclerView.VERTICAL, false);
+        RecyclerView recyclerView = findViewById(R.id.recycler);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 

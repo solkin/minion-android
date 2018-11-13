@@ -53,22 +53,38 @@ public class MinionSharedPreferences implements SharedPreferences {
 
     @Override
     public int getInt(String key, int value) {
-        return Integer.parseInt(minion.getValue(PREF_GROUP_NAME, key, String.valueOf(value)));
+        String storedValue = minion.getValue(PREF_GROUP_NAME, key);
+        if (storedValue != null) {
+            return Integer.parseInt(storedValue);
+        }
+        return value;
     }
 
     @Override
     public long getLong(String key, long value) {
-        return Long.parseLong(minion.getValue(PREF_GROUP_NAME, key, String.valueOf(value)));
+        String storedValue = minion.getValue(PREF_GROUP_NAME, key);
+        if (storedValue != null) {
+            return Long.parseLong(storedValue);
+        }
+        return value;
     }
 
     @Override
     public float getFloat(String key, float value) {
-        return Float.parseFloat(minion.getValue(PREF_GROUP_NAME, key, String.valueOf(value)));
+        String storedValue = minion.getValue(PREF_GROUP_NAME, key);
+        if (storedValue != null) {
+            return Float.parseFloat(storedValue);
+        }
+        return value;
     }
 
     @Override
     public boolean getBoolean(String key, boolean value) {
-        return Boolean.parseBoolean(minion.getValue(PREF_GROUP_NAME, key, String.valueOf(value)));
+        String storedValue = minion.getValue(PREF_GROUP_NAME, key);
+        if (storedValue != null) {
+            return Boolean.parseBoolean(storedValue);
+        }
+        return value;
     }
 
     @Override

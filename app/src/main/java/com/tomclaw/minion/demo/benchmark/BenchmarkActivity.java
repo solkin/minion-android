@@ -1,12 +1,14 @@
 package com.tomclaw.minion.demo.benchmark;
 
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
+
 import android.view.MenuItem;
 
 import com.tomclaw.minion.Minion;
@@ -43,7 +45,7 @@ public class BenchmarkActivity extends AppCompatActivity implements BenchmarkTas
 
         adapter = new BenchmarkRecyclerAdapter(this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,
-                LinearLayoutManager.VERTICAL, false);
+                RecyclerView.VERTICAL, false);
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
