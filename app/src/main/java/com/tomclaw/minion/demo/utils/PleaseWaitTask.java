@@ -2,6 +2,7 @@ package com.tomclaw.minion.demo.utils;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 

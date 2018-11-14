@@ -2,9 +2,11 @@ package com.tomclaw.minion.demo.compile;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,18 +28,15 @@ public class MinionRecyclerAdapter extends RecyclerView.Adapter<MinionViewHolder
     private static final int TYPE_GROUP = 0x01;
     private static final int TYPE_RECORD = 0x02;
 
-    private
     @NonNull
-    List<MinionItem> items;
+    private List<MinionItem> items;
 
     private LayoutInflater layoutInflater;
 
-    private
     @Nullable
-    GroupListener groupListener;
-    private
+    private GroupListener groupListener;
     @Nullable
-    RecordListener recordListener;
+    private RecordListener recordListener;
 
     public MinionRecyclerAdapter(Context context) {
         this.layoutInflater = LayoutInflater.from(context);

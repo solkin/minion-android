@@ -2,6 +2,7 @@ package com.tomclaw.minion.demo.compile;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.View;
 
 /**
@@ -14,4 +15,5 @@ abstract class MinionViewHolder extends RecyclerView.ViewHolder {
     }
 
     public abstract void bind(@NonNull MinionItem item);
+
 }

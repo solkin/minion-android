@@ -22,9 +22,9 @@ public class BenchmarkItemViewHolder extends RecyclerView.ViewHolder {
 
     public BenchmarkItemViewHolder(View itemView) {
         super(itemView);
-        this.title = (TextView) itemView.findViewById(R.id.title);
-        this.progress = (MaterialProgressBar) itemView.findViewById(R.id.progress);
-        this.result = (TextView) itemView.findViewById(R.id.result);
+        this.title = itemView.findViewById(R.id.title);
+        this.progress = itemView.findViewById(R.id.progress);
+        this.result = itemView.findViewById(R.id.result);
 
         Drawable drawable = new IndeterminateHorizontalProgressDrawable(itemView.getContext());
         progress.setIndeterminateDrawable(drawable);

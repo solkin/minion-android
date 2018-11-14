@@ -2,12 +2,14 @@ package com.tomclaw.minion.demo.parse;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -25,9 +27,8 @@ public class ParseActivity extends AppCompatActivity {
 
     public static final String EXTRA_INI_STRUCTURE = "ini_structure";
 
-    private
     @Nullable
-    EditText input;
+    private EditText input;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,7 +36,7 @@ public class ParseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parse);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         ActionBar actionBar = getSupportActionBar();
@@ -44,7 +45,7 @@ public class ParseActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        input = (EditText) findViewById(R.id.input);
+        input = findViewById(R.id.input);
         if (input != null) {
             input.addTextChangedListener(new IniSyntaxHighlighter());
         }

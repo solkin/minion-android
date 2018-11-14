@@ -1,6 +1,7 @@
 package com.tomclaw.minion.demo.parse;
 
 import androidx.annotation.NonNull;
+
 import android.widget.EditText;
 
 import com.tomclaw.minion.demo.R;

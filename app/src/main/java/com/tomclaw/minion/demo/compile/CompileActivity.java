@@ -48,7 +48,7 @@ public class CompileActivity extends AppCompatActivity implements GroupListener,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compile);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         ActionBar actionBar = getSupportActionBar();
@@ -60,7 +60,7 @@ public class CompileActivity extends AppCompatActivity implements GroupListener,
         adapter = new MinionRecyclerAdapter(this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,
                 RecyclerView.VERTICAL, false);
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler);
+        RecyclerView recyclerView = findViewById(R.id.recycler);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 

@@ -1,6 +1,7 @@
 package com.tomclaw.minion.demo.parse;
 
 import androidx.annotation.ColorInt;
+
 import android.text.Editable;
 import android.text.Spannable;
 import android.text.TextWatcher;

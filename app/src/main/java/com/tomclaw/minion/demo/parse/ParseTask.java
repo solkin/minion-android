@@ -3,6 +3,7 @@ package com.tomclaw.minion.demo.parse;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -27,13 +28,11 @@ class ParseTask extends PleaseWaitTask<Activity> {
 
     @NonNull
     private final String data;
-    private
     @Nullable
-    Minion minion;
+    private Minion minion;
     private long delay;
-    private
     @Nullable
-    MemoryStorage storage;
+    private MemoryStorage storage;
 
     ParseTask(@NonNull Activity activity, @NonNull String data) {
         super(activity);

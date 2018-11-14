@@ -20,9 +20,9 @@ class SectionViewHolder extends RecyclerView.ViewHolder {
     SectionViewHolder(View itemView) {
         super(itemView);
         this.itemView = itemView;
-        this.icon = (ImageView) itemView.findViewById(R.id.icon);
-        this.text = (TextView) itemView.findViewById(R.id.text);
-        this.description = (TextView) itemView.findViewById(R.id.description);
+        this.icon = itemView.findViewById(R.id.icon);
+        this.text = itemView.findViewById(R.id.text);
+        this.description = itemView.findViewById(R.id.description);
     }
 
     void bind(final SectionItem item, final OnItemClickListener listener) {

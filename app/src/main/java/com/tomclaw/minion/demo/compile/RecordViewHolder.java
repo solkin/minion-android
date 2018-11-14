@@ -2,6 +2,7 @@ package com.tomclaw.minion.demo.compile;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import android.view.View;
 import android.widget.TextView;
 
@@ -14,25 +15,21 @@ import com.tomclaw.minion.demo.R;
  */
 class RecordViewHolder extends MinionViewHolder {
 
-    private final
     @Nullable
-    RecordListener recordListener;
+    private final RecordListener recordListener;
 
-    private final
     @NonNull
-    TextView key;
-    private final
+    private final TextView key;
     @NonNull
-    TextView value;
-    private final
+    private final TextView value;
     @NonNull
-    View delete;
+    private final View delete;
 
     RecordViewHolder(@NonNull View itemView, @Nullable RecordListener recordListener) {
         super(itemView);
         this.recordListener = recordListener;
-        this.key = (TextView) itemView.findViewById(R.id.key);
-        this.value = (TextView) itemView.findViewById(R.id.value);
+        this.key = itemView.findViewById(R.id.key);
+        this.value = itemView.findViewById(R.id.value);
         this.delete = itemView.findViewById(R.id.delete);
     }
 

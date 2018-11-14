@@ -13,11 +13,9 @@ import com.tomclaw.minion.IniRecord;
 public class MinionItem {
 
     @NonNull
-    private final
-    IniGroup group;
-    private final
+    private final IniGroup group;
     @Nullable
-    IniRecord record;
+    private final IniRecord record;
 
     public MinionItem(@NonNull IniGroup group) {
         this.group = group;

@@ -1,8 +1,10 @@
 package com.tomclaw.minion.demo.compile;
 
 import android.content.res.Resources;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import android.view.View;
 import android.widget.TextView;
 
@@ -14,28 +16,23 @@ import com.tomclaw.minion.demo.R;
  */
 class GroupViewHolder extends MinionViewHolder {
 
-    private final
     @Nullable
-    GroupListener groupListener;
+    private final GroupListener groupListener;
 
-    private final
     @NonNull
-    TextView name;
-    private final
+    private final TextView name;
     @NonNull
-    TextView description;
-    private final
+    private final TextView description;
     @NonNull
-    View insert;
-    private final
+    private final View insert;
     @NonNull
-    View delete;
+    private final View delete;
 
     GroupViewHolder(@NonNull View itemView, @Nullable GroupListener groupListener) {
         super(itemView);
         this.groupListener = groupListener;
-        this.name = (TextView) itemView.findViewById(R.id.name);
-        this.description = (TextView) itemView.findViewById(R.id.description);
+        this.name = itemView.findViewById(R.id.name);
+        this.description = itemView.findViewById(R.id.description);
         this.insert = itemView.findViewById(R.id.insert);
         this.delete = itemView.findViewById(R.id.delete);
     }

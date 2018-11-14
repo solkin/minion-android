@@ -34,7 +34,7 @@ public class BenchmarkActivity extends AppCompatActivity implements BenchmarkTas
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_benchmark);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         ActionBar actionBar = getSupportActionBar();
@@ -46,7 +46,7 @@ public class BenchmarkActivity extends AppCompatActivity implements BenchmarkTas
         adapter = new BenchmarkRecyclerAdapter(this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,
                 RecyclerView.VERTICAL, false);
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler);
+        RecyclerView recyclerView = findViewById(R.id.recycler);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
