@@ -6,7 +6,6 @@ import java.io.InputStream;
 /**
  * Created by solkin on 28.07.17.
  */
-
 public interface Readable {
 
     InputStream read() throws IOException;

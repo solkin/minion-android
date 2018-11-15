@@ -16,6 +16,7 @@ import java.io.OutputStreamWriter;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -44,7 +45,7 @@ public class Minion {
     private final Writable writable;
     private final boolean async;
 
-    private final LinkedHashMap<String, IniGroup> groups = new LinkedHashMap<>();
+    private final Map<String, IniGroup> groups = new LinkedHashMap<>();
 
     private Minion(Readable readable, Writable writable, boolean async) {
         this.readable = readable;
