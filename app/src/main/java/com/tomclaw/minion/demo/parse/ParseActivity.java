@@ -2,14 +2,6 @@ package com.tomclaw.minion.demo.parse;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -17,6 +9,13 @@ import android.widget.EditText;
 import com.tomclaw.minion.demo.R;
 import com.tomclaw.minion.demo.utils.Task;
 import com.tomclaw.minion.demo.utils.TaskExecutor;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 
 import static com.tomclaw.minion.demo.utils.StatusBarHelper.tintStatusBarIcons;
 

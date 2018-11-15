@@ -1,9 +1,9 @@
 package com.tomclaw.minion.demo.compile;
 
+import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.View;
 
 /**
  * Created by solkin on 03.09.17.

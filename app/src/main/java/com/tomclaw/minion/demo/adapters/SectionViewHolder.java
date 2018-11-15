@@ -1,11 +1,12 @@
 package com.tomclaw.minion.demo.adapters;
 
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.tomclaw.minion.demo.R;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Created by solkin on 03.08.17.

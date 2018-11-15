@@ -1,10 +1,10 @@
 package com.tomclaw.minion.demo.compile;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import com.tomclaw.minion.IniGroup;
 import com.tomclaw.minion.IniRecord;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 /**
  * Created by solkin on 03.09.17.

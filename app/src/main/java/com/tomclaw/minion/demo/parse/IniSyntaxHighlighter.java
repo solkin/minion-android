@@ -1,7 +1,5 @@
 package com.tomclaw.minion.demo.parse;
 
-import androidx.annotation.ColorInt;
-
 import android.text.Editable;
 import android.text.Spannable;
 import android.text.TextWatcher;
@@ -16,6 +14,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import androidx.annotation.ColorInt;
 
 import static com.tomclaw.minion.StreamHelper.safeClose;
 

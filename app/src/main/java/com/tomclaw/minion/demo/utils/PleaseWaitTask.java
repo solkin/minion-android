@@ -3,10 +3,10 @@ package com.tomclaw.minion.demo.utils;
 import android.app.ProgressDialog;
 import android.content.Context;
 
+import java.lang.ref.WeakReference;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
-
-import java.lang.ref.WeakReference;
 
 /**
  * Created with IntelliJ IDEA.

@@ -3,11 +3,6 @@ package com.tomclaw.minion.demo;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.appcompat.widget.Toolbar;
-
 import com.tomclaw.minion.demo.adapters.OnItemClickListener;
 import com.tomclaw.minion.demo.adapters.SectionItem;
 import com.tomclaw.minion.demo.adapters.SectionsRecyclerAdapter;
@@ -16,6 +11,11 @@ import com.tomclaw.minion.demo.compile.CompileActivity;
 import com.tomclaw.minion.demo.parse.ParseActivity;
 
 import java.util.Arrays;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import static com.tomclaw.minion.demo.utils.StatusBarHelper.tintStatusBarIcons;
 
