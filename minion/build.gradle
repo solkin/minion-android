@@ -43,7 +43,7 @@ ext {
     siteUrl = 'https://github.com/solkin/minion-android'
     gitUrl = 'https://github.com/solkin/minion-android.git'
 
-    libraryVersion = '1.0.2'
+    libraryVersion = '1.0.3'
 
     developerId = 'solkin'
     developerName = 'Igor Solkin'
