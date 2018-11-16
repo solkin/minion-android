@@ -10,7 +10,7 @@ Minion is a handy group-key-value data storage library, powered by INI format. L
 compile 'com.tomclaw.minion:minion:1.0.3'
 ```
 
-### Create anync Minion for file
+### Create async Minion for file
 ```java
 FileStorage storage = FileStorage.create(file);
 Minion minion = Minion.lets()
@@ -24,7 +24,7 @@ Minion minion = Minion.lets()
             }
 
             void onFailure(Exception ex) {
-            	// Something went wrond.
+            	// Something went wrong.
             }
         });
 ```
@@ -46,7 +46,7 @@ minion.store(new ResultCallback() {
     }
 
     void onFailure(Exception ex) {
-    	// Something went wrond.
+    	// Something went wrong.
     }
 });
 ```
