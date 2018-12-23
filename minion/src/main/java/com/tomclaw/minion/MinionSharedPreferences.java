@@ -1,13 +1,15 @@
 package com.tomclaw.minion;
 
 import android.content.SharedPreferences;
-import androidx.annotation.Nullable;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
+
+import androidx.annotation.Nullable;
 
 /**
  * Created by solkin on 07/11/2017.
@@ -17,6 +19,8 @@ public class MinionSharedPreferences implements SharedPreferences {
     private static final String PREF_GROUP_NAME = "Preferences";
 
     private Minion minion;
+
+    private Set<OnSharedPreferenceChangeListener> listeners = new HashSet<>();
 
     public MinionSharedPreferences(Minion minion) {
         this.minion = minion;
@@ -98,14 +102,20 @@ public class MinionSharedPreferences implements SharedPreferences {
         return new MinionEditor();
     }
 
+    private void notifyListeners(String key) {
+        for (OnSharedPreferenceChangeListener listener : listeners) {
+            listener.onSharedPreferenceChanged(this, key);
+        }
+    }
+
     @Override
     public void registerOnSharedPreferenceChangeListener(OnSharedPreferenceChangeListener onSharedPreferenceChangeListener) {
-        throw new UnsupportedOperationException("not implemented yet");
+        listeners.add(onSharedPreferenceChangeListener);
     }
 
     @Override
     public void unregisterOnSharedPreferenceChangeListener(OnSharedPreferenceChangeListener onSharedPreferenceChangeListener) {
-        throw new UnsupportedOperationException("not implemented yet");
+        listeners.remove(onSharedPreferenceChangeListener);
     }
 
     public class MinionEditor implements Editor {
@@ -113,6 +123,7 @@ public class MinionSharedPreferences implements SharedPreferences {
         @Override
         public Editor putString(String key, @Nullable String value) {
             minion.setValue(PREF_GROUP_NAME, key, value);
+            notifyListeners(key);
             return this;
         }
 
@@ -122,42 +133,57 @@ public class MinionSharedPreferences implements SharedPreferences {
                 String[] values = value.toArray(new String[0]);
                 minion.setValue(PREF_GROUP_NAME, key, values);
             }
+            notifyListeners(key);
             return this;
         }
 
         @Override
         public Editor putInt(String key, int value) {
             minion.setValue(PREF_GROUP_NAME, key, Integer.toString(value));
+            notifyListeners(key);
             return this;
         }
 
         @Override
         public Editor putLong(String key, long value) {
             minion.setValue(PREF_GROUP_NAME, key, Long.toString(value));
+            notifyListeners(key);
             return this;
         }
 
         @Override
         public Editor putFloat(String key, float value) {
             minion.setValue(PREF_GROUP_NAME, key, Float.toString(value));
+            notifyListeners(key);
             return this;
         }
 
         @Override
         public Editor putBoolean(String key, boolean value) {
             minion.setValue(PREF_GROUP_NAME, key, Boolean.toString(value));
+            notifyListeners(key);
             return this;
         }
 
         @Override
         public Editor remove(String key) {
             minion.removeRecord(PREF_GROUP_NAME, key);
+            notifyListeners(key);
             return this;
         }
 
         @Override
         public Editor clear() {
-            minion.getGroups();
+            Set<String> keys = new HashSet<>();
+            for (IniGroup group : minion.getGroups()) {
+                for (IniRecord record : group.getRecords()) {
+                    keys.add(record.getKey());
+                }
+            }
+            minion.clear();
+            for (String key : keys) {
+                notifyListeners(key);
+            }
             return this;
         }
 
