@@ -7,7 +7,7 @@ Minion is a handy group-key-value data storage library, powered by INI format. L
 
 ### Add dependency
 ```groovy
-implementation 'com.tomclaw.minion:minion:1.0.3'
+implementation 'com.tomclaw.minion:minion:1.1.0'
 ```
 
 ### Create async Minion for file
