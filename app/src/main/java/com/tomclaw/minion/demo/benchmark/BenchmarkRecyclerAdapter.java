@@ -10,6 +10,7 @@ import com.tomclaw.minion.demo.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**
@@ -32,14 +33,15 @@ public class BenchmarkRecyclerAdapter extends RecyclerView.Adapter<BenchmarkItem
         return list.size() - 1;
     }
 
+    @NonNull
     @Override
-    public BenchmarkItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public BenchmarkItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.benchmark_item, parent, false);
         return new BenchmarkItemViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(BenchmarkItemViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull BenchmarkItemViewHolder holder, int position) {
         BenchmarkItem item = list.get(position);
         holder.bind(item);
     }

@@ -8,6 +8,7 @@ import com.tomclaw.minion.Minion;
 import com.tomclaw.minion.demo.R;
 import com.tomclaw.minion.demo.compile.CompileActivity;
 import com.tomclaw.minion.demo.utils.PleaseWaitTask;
+import com.tomclaw.minion.demo.utils.StringUtil;
 import com.tomclaw.minion.storage.MemoryStorage;
 import com.tomclaw.minion.storage.Readable;
 import com.tomclaw.minion.storage.StringStorage;
@@ -40,7 +41,7 @@ class ParseTask extends PleaseWaitTask<Activity> {
     }
 
     @Override
-    public void executeBackground() throws Throwable {
+    public void executeBackground() {
         Readable readable = StringStorage.create(data);
         storage = MemoryStorage.create();
         long startTime = System.currentTimeMillis();
@@ -69,8 +70,9 @@ class ParseTask extends PleaseWaitTask<Activity> {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             try {
+                                if (storage == null) return;
                                 minion.store();
-                                String data = new String(readFully(storage), "UTF-8");
+                                String data = new String(readFully(storage), StringUtil.UTF_8);
                                 Intent intent = new Intent(activity, CompileActivity.class)
                                         .putExtra(CompileActivity.EXTRA_INI_STRUCTURE, data);
                                 activity.startActivity(intent);

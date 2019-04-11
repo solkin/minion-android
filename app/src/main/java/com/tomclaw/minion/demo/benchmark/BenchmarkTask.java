@@ -65,7 +65,7 @@ abstract class BenchmarkTask extends Task {
     protected abstract int getTestsCount();
 
     @Override
-    public final void executeBackground() throws Throwable {
+    public final void executeBackground() {
         setResult("Calculating...");
         Minion minion = getMinion();
         beforeTest(minion);

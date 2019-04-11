@@ -1,5 +1,6 @@
 package com.tomclaw.minion.demo.utils;
 
+import java.nio.charset.Charset;
 import java.util.Random;
 
 /**
@@ -10,6 +11,7 @@ import java.util.Random;
  */
 public class StringUtil {
 
+    public static final Charset UTF_8 = Charset.forName("UTF-8");
     private static Random random;
 
     static {

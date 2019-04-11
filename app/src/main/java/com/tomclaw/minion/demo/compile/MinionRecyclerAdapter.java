@@ -60,9 +60,10 @@ public class MinionRecyclerAdapter extends RecyclerView.Adapter<MinionViewHolder
         this.recordListener = recordListener;
     }
 
+    @NonNull
     @SuppressLint("DefaultLocale")
     @Override
-    public MinionViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MinionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
         switch (viewType) {
             case TYPE_GROUP:
@@ -77,7 +78,7 @@ public class MinionRecyclerAdapter extends RecyclerView.Adapter<MinionViewHolder
     }
 
     @Override
-    public void onBindViewHolder(MinionViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MinionViewHolder holder, int position) {
         MinionItem item = items.get(position);
         holder.bind(item);
     }

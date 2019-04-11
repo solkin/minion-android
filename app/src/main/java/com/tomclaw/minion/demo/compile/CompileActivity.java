@@ -12,10 +12,12 @@ import com.tomclaw.minion.Minion;
 import com.tomclaw.minion.StreamHelper;
 import com.tomclaw.minion.demo.R;
 import com.tomclaw.minion.demo.parse.ParseActivity;
+import com.tomclaw.minion.demo.utils.StringUtil;
 import com.tomclaw.minion.storage.MemoryStorage;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.charset.Charset;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
@@ -134,7 +136,7 @@ public class CompileActivity extends AppCompatActivity implements GroupListener,
             case R.id.compile:
                 minion.store();
                 try {
-                    String string = new String(StreamHelper.readFully(storage), "UTF-8");
+                    String string = new String(StreamHelper.readFully(storage), StringUtil.UTF_8);
                     Intent intent = new Intent(CompileActivity.this, ParseActivity.class)
                             .putExtra(ParseActivity.EXTRA_INI_STRUCTURE, string);
                     startActivity(intent);

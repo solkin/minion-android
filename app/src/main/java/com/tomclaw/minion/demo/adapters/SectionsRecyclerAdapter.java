@@ -10,6 +10,7 @@ import com.tomclaw.minion.demo.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**
@@ -36,14 +37,15 @@ public class SectionsRecyclerAdapter extends RecyclerView.Adapter<SectionViewHol
         this.clickListener = clickListener;
     }
 
+    @NonNull
     @Override
-    public SectionViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public SectionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.section_item, parent, false);
         return new SectionViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(SectionViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull SectionViewHolder holder, int position) {
         SectionItem item = list.get(position);
         holder.bind(item, clickListener);
     }
