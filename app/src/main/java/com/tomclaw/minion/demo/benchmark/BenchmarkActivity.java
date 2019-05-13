@@ -3,19 +3,19 @@ package com.tomclaw.minion.demo.benchmark;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.tomclaw.minion.Minion;
-import com.tomclaw.minion.demo.R;
-import com.tomclaw.minion.demo.utils.Task;
-import com.tomclaw.minion.demo.utils.TaskExecutor;
-import com.tomclaw.minion.storage.MemoryStorage;
-import com.tomclaw.minion.storage.Writable;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.tomclaw.minion.Minion;
+import com.tomclaw.minion.demo.R;
+import com.tomclaw.minion.demo.utils.Task;
+import com.tomclaw.minion.demo.utils.TaskExecutor;
+import com.tomclaw.minion.storage.MemoryStorage;
+import com.tomclaw.minion.storage.Writable;
 
 import static com.tomclaw.minion.demo.utils.StatusBarHelper.tintStatusBarIcons;
 

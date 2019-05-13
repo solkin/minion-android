@@ -5,6 +5,8 @@ import android.text.Spannable;
 import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
 
+import androidx.annotation.ColorInt;
+
 import com.tomclaw.minion.UnsupportedFormatException;
 import com.tomclaw.minion.demo.utils.MainExecutor;
 
@@ -14,8 +16,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import androidx.annotation.ColorInt;
 
 import static com.tomclaw.minion.StreamHelper.safeClose;
 

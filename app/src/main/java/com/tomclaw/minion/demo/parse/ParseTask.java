@@ -4,6 +4,10 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+
 import com.tomclaw.minion.Minion;
 import com.tomclaw.minion.demo.R;
 import com.tomclaw.minion.demo.compile.CompileActivity;
@@ -15,10 +19,6 @@ import com.tomclaw.minion.storage.StringStorage;
 
 import java.io.IOException;
 import java.util.Set;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 
 import static com.tomclaw.minion.StreamHelper.readFully;
 

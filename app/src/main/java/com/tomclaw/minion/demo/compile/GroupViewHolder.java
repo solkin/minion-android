@@ -4,11 +4,11 @@ import android.content.res.Resources;
 import android.view.View;
 import android.widget.TextView;
 
-import com.tomclaw.minion.IniGroup;
-import com.tomclaw.minion.demo.R;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.tomclaw.minion.IniGroup;
+import com.tomclaw.minion.demo.R;
 
 /**
  * Created by solkin on 03.09.17.

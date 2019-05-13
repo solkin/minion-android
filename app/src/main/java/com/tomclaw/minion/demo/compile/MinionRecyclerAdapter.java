@@ -6,6 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.tomclaw.minion.IniGroup;
 import com.tomclaw.minion.IniRecord;
 import com.tomclaw.minion.Minion;
@@ -13,10 +17,6 @@ import com.tomclaw.minion.demo.R;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Created by solkin on 03.09.17.

@@ -4,9 +4,10 @@ import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.tomclaw.minion.demo.R;
 
-import androidx.recyclerview.widget.RecyclerView;
 import me.zhanghai.android.materialprogressbar.IndeterminateHorizontalProgressDrawable;
 import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 

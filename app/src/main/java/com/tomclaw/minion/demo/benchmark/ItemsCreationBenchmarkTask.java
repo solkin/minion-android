@@ -1,9 +1,9 @@
 package com.tomclaw.minion.demo.benchmark;
 
+import androidx.annotation.NonNull;
+
 import com.tomclaw.minion.Minion;
 import com.tomclaw.minion.demo.R;
-
-import androidx.annotation.NonNull;
 
 import static com.tomclaw.minion.demo.utils.StringUtil.generateRandomString;
 

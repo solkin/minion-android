@@ -1,13 +1,13 @@
 package com.tomclaw.minion.demo.benchmark;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
+
 import com.tomclaw.minion.Minion;
 import com.tomclaw.minion.demo.utils.MainExecutor;
 import com.tomclaw.minion.demo.utils.Task;
 
 import java.util.concurrent.TimeUnit;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.StringRes;
 
 /**
  * Created by solkin on 09.08.17.

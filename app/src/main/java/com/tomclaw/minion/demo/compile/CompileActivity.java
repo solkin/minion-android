@@ -6,6 +6,15 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.tomclaw.minion.IniGroup;
 import com.tomclaw.minion.IniRecord;
 import com.tomclaw.minion.Minion;
@@ -17,16 +26,6 @@ import com.tomclaw.minion.storage.MemoryStorage;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.nio.charset.Charset;
-
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import static com.tomclaw.minion.StreamHelper.safeClose;
 import static com.tomclaw.minion.demo.utils.StatusBarHelper.tintStatusBarIcons;

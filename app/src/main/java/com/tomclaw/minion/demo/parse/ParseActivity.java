@@ -6,16 +6,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
-import com.tomclaw.minion.demo.R;
-import com.tomclaw.minion.demo.utils.Task;
-import com.tomclaw.minion.demo.utils.TaskExecutor;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
+
+import com.tomclaw.minion.demo.R;
+import com.tomclaw.minion.demo.utils.Task;
+import com.tomclaw.minion.demo.utils.TaskExecutor;
 
 import static com.tomclaw.minion.demo.utils.StatusBarHelper.tintStatusBarIcons;
 

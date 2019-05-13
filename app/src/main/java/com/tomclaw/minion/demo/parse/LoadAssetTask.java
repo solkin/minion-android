@@ -2,14 +2,14 @@ package com.tomclaw.minion.demo.parse;
 
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
+
 import com.tomclaw.minion.demo.R;
 import com.tomclaw.minion.demo.utils.WeakObjectTask;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-
-import androidx.annotation.NonNull;
 
 /**
  * Created by solkin on 30.08.17.
