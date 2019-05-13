@@ -10,6 +10,7 @@ import java.io.OutputStream;
 /**
  * Created by solkin on 28.07.17.
  */
+@SuppressWarnings("WeakerAccess")
 public class FileStorage implements Readable, Writable {
 
     private File file;

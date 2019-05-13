@@ -3,9 +3,9 @@ package com.tomclaw.minion;
 /**
  * Created by solkin on 01.08.17.
  */
-public class StringHelper {
+class StringHelper {
 
-    public static String join(String delimiter, String[] tokens) {
+    static String join(String delimiter, String[] tokens) {
         StringBuilder sb = new StringBuilder();
         boolean firstTime = true;
         for (Object token : tokens) {

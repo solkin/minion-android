@@ -27,7 +27,7 @@ import static com.tomclaw.minion.StringHelper.join;
 /**
  * Created by solkin on 27.07.17.
  */
-@SuppressWarnings("WeakerAccess")
+@SuppressWarnings({"WeakerAccess", "unused", "UnusedReturnValue"})
 public class Minion {
 
     public static final String DEFAULT_GROUP_NAME = "";
@@ -54,23 +54,29 @@ public class Minion {
     }
 
     @Nullable
-    public IniRecord setValue(@NonNull String name,
-                              @NonNull String key,
-                              @NonNull String... value) {
+    public IniRecord setValue(
+            @NonNull String name,
+            @NonNull String key,
+            @NonNull String... value
+    ) {
         IniGroup group = getOrCreateGroup(name);
         return group.getOrCreateRecord(key, value);
     }
 
     @Nullable
-    public String getValue(@NonNull String name,
-                           @NonNull String key) {
+    public String getValue(
+            @NonNull String name,
+            @NonNull String key
+    ) {
         return getValue(name, key, null);
     }
 
     @Nullable
-    public String getValue(@NonNull String name,
-                           @NonNull String key,
-                           @Nullable String defValue) {
+    public String getValue(
+            @NonNull String name,
+            @NonNull String key,
+            @Nullable String defValue
+    ) {
         String value = defValue;
         IniGroup group = getOrCreateGroup(name);
         IniRecord record = group.getRecord(key);
@@ -81,15 +87,19 @@ public class Minion {
     }
 
     @Nullable
-    public String[] getValues(@NonNull String name,
-                              @NonNull String key) {
+    public String[] getValues(
+            @NonNull String name,
+            @NonNull String key
+    ) {
         return getValues(name, key, null);
     }
 
     @Nullable
-    public String[] getValues(@NonNull String name,
-                              @NonNull String key,
-                              @Nullable String[] defValue) {
+    public String[] getValues(
+            @NonNull String name,
+            @NonNull String key,
+            @Nullable String[] defValue
+    ) {
         String[] value = defValue;
         IniGroup group = getOrCreateGroup(name);
         IniRecord record = group.getRecord(key);

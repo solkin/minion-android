@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 /**
  * Created by solkin on 07/11/2017.
  */
+@SuppressWarnings("unused")
 public class MinionSharedPreferences implements SharedPreferences {
 
     private static final String PREF_GROUP_NAME = "Preferences";
