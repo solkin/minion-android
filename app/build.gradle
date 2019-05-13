@@ -36,7 +36,7 @@ dependencies {
     })
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'com.google.android.material:material:1.0.0'
-    implementation 'me.zhanghai.android.materialprogressbar:library:1.4.1'
+    implementation 'me.zhanghai.android.materialprogressbar:library:1.6.1'
     testImplementation 'junit:junit:4.12'
     implementation project(path: ':minion')
 }
