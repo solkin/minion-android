@@ -2,14 +2,14 @@ package com.tomclaw.minion;
 
 import android.content.SharedPreferences;
 
+import androidx.annotation.Nullable;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
-
-import androidx.annotation.Nullable;
 
 /**
  * Created by solkin on 07/11/2017.

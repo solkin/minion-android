@@ -9,6 +9,7 @@ import org.junit.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.Set;
 
@@ -49,7 +50,7 @@ public class MinionUnitTest {
         minion.setValue("second_group", " array_key ", "value1 ", " value2 ", " value3");
         minion.store();
 
-        String data = new String(readFully(storage), "UTF-8");
+        String data = new String(readFully(storage), StandardCharsets.UTF_8);
         assertEquals(data, "[first_group]\nfirst_key=first_value\n[second_group]\n" +
                 "second_key=second_value\narray_key=value1,value2,value3");
     }
