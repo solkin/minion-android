@@ -32,4 +32,5 @@ public class FileStorage implements Readable, Writable {
     public static FileStorage create(File file) {
         return new FileStorage(file);
     }
+
 }

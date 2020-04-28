@@ -31,4 +31,5 @@ public class MemoryStorage implements Readable, Writable {
     public static MemoryStorage create() {
         return new MemoryStorage();
     }
+
 }

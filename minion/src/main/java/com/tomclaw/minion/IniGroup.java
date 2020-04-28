@@ -85,4 +85,5 @@ public class IniGroup {
         result = 31 * result + records.hashCode();
         return result;
     }
+
 }

@@ -198,5 +198,7 @@ public class MinionSharedPreferences implements SharedPreferences {
         public void apply() {
             minion.store();
         }
+
     }
+
 }

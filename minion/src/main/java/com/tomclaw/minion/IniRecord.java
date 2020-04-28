@@ -16,6 +16,7 @@ public class IniRecord {
 
     protected IniRecord(@NonNull String key, @NonNull String... value) {
         this.key = key.trim();
+        this.value = new String[]{};
         setValue(value);
     }
 
@@ -42,6 +43,7 @@ public class IniRecord {
         trimValues();
     }
 
+    @SuppressWarnings("WeakerAccess")
     public boolean hasValue() {
         return value.length > 0;
     }
@@ -67,4 +69,5 @@ public class IniRecord {
         result = 31 * result + Arrays.hashCode(value);
         return result;
     }
+
 }
