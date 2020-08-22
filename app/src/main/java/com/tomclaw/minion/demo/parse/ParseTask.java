@@ -63,25 +63,17 @@ class ParseTask extends PleaseWaitTask<Activity> {
                 recordsCount += minion.getOrCreateGroup(name).getRecords().size();
             }
             String result = activity.getString(R.string.parsing_result, delay, names.size(), recordsCount);
-            new AlertDialog.Builder(activity)
-                    .setTitle(R.string.parse_action)
-                    .setMessage(result)
-                    .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            try {
-                                if (storage == null) return;
-                                minion.store();
-                                String data = new String(readFully(storage), StringUtil.UTF_8);
-                                Intent intent = new Intent(activity, CompileActivity.class)
-                                        .putExtra(CompileActivity.EXTRA_INI_STRUCTURE, data);
-                                activity.startActivity(intent);
-                                activity.finish();
-                            } catch (IOException ignored) {
-                            }
-                        }
-                    })
-                    .show();
+            try {
+                if (storage == null) return;
+                minion.store();
+                String data = new String(readFully(storage), StringUtil.UTF_8);
+                Intent intent = new Intent(activity, CompileActivity.class)
+                        .putExtra(CompileActivity.EXTRA_MESSAGE, result)
+                        .putExtra(CompileActivity.EXTRA_INI_STRUCTURE, data);
+                activity.startActivity(intent);
+                activity.finish();
+            } catch (IOException ignored) {
+            }
         }
     }
 

@@ -3,9 +3,11 @@ package com.tomclaw.minion.demo.compile;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +17,7 @@ import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.tomclaw.minion.IniGroup;
 import com.tomclaw.minion.IniRecord;
 import com.tomclaw.minion.Minion;
@@ -36,6 +39,7 @@ import static com.tomclaw.minion.demo.utils.StringUtil.generateRandomString;
  */
 public class CompileActivity extends AppCompatActivity implements GroupListener, RecordListener {
 
+    public static final String EXTRA_MESSAGE = "message";
     public static final String EXTRA_INI_STRUCTURE = "ini_structure";
 
     private MemoryStorage storage;
@@ -69,6 +73,10 @@ public class CompileActivity extends AppCompatActivity implements GroupListener,
 
         storage = MemoryStorage.create();
         if (savedInstanceState == null) {
+            String message = getIntent().getStringExtra(EXTRA_MESSAGE);
+            if (!TextUtils.isEmpty(message)) {
+                Snackbar.make(recyclerView, message, Snackbar.LENGTH_LONG).show();
+            }
             String extra = getIntent().getStringExtra(EXTRA_INI_STRUCTURE);
             if (extra != null) {
                 bytesToStorage(extra.getBytes());
@@ -98,7 +106,7 @@ public class CompileActivity extends AppCompatActivity implements GroupListener,
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         minion.store();
         try {
