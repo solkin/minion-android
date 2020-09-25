@@ -178,5 +178,7 @@ class IniSyntaxHighlighter implements TextWatcher {
                 }
             });
         }
+
     }
+
 }

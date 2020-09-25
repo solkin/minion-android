@@ -58,4 +58,5 @@ class RecordViewHolder extends MinionViewHolder {
             }
         });
     }
+
 }

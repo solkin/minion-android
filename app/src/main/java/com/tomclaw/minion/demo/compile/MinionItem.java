@@ -40,4 +40,5 @@ public class MinionItem {
     public IniRecord getRecord() {
         return record;
     }
+
 }

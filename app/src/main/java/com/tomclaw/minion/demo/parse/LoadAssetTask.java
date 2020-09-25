@@ -45,4 +45,5 @@ class LoadAssetTask extends WeakObjectTask<EditText> {
             editText.setText(total);
         }
     }
+
 }

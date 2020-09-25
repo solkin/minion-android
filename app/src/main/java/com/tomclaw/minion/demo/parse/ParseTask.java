@@ -81,4 +81,5 @@ class ParseTask extends PleaseWaitTask<Activity> {
     public int getWaitStringId() {
         return R.string.please_wait;
     }
+
 }
