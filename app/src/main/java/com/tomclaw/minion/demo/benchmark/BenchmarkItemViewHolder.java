@@ -17,9 +17,9 @@ import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 @SuppressWarnings("WeakerAccess")
 public class BenchmarkItemViewHolder extends RecyclerView.ViewHolder {
 
-    private TextView title;
-    private MaterialProgressBar progress;
-    private TextView result;
+    private final TextView title;
+    private final MaterialProgressBar progress;
+    private final TextView result;
 
     public BenchmarkItemViewHolder(View itemView) {
         super(itemView);

@@ -16,12 +16,12 @@ abstract class BenchmarkTask extends Task {
 
     private static final long DEBOUNCE_DELAY = 500;
     @NonNull
-    private BenchmarkItem benchmarkItem;
-    private Minion minion;
+    private final BenchmarkItem benchmarkItem;
+    private final Minion minion;
     @NonNull
-    private BenchmarkRecyclerAdapter adapter;
+    private final BenchmarkRecyclerAdapter adapter;
     @NonNull
-    private BenchmarkCallback callback;
+    private final BenchmarkCallback callback;
     private long lastUpdateTime;
     private AdapterUpdater adapterUpdater;
 
@@ -114,8 +114,8 @@ abstract class BenchmarkTask extends Task {
     private static class AdapterUpdater implements Runnable {
 
         @NonNull
-        private BenchmarkRecyclerAdapter adapter;
-        private int position;
+        private final BenchmarkRecyclerAdapter adapter;
+        private final int position;
 
         private AdapterUpdater(@NonNull BenchmarkRecyclerAdapter adapter, int position) {
             this.adapter = adapter;
