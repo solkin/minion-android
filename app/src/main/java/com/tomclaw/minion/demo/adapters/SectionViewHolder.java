@@ -13,10 +13,10 @@ import com.tomclaw.minion.demo.R;
  */
 class SectionViewHolder extends RecyclerView.ViewHolder {
 
-    private View itemView;
-    private ImageView icon;
-    private TextView text;
-    private TextView description;
+    private final View itemView;
+    private final ImageView icon;
+    private final TextView text;
+    private final TextView description;
 
     SectionViewHolder(View itemView) {
         super(itemView);

@@ -9,16 +9,16 @@ import androidx.annotation.NonNull;
 @SuppressWarnings("WeakerAccess")
 public class SectionItem {
 
-    private int id;
+    private final int id;
 
     @DrawableRes
-    private int icon;
+    private final int icon;
 
     @NonNull
-    private String text;
+    private final String text;
 
     @NonNull
-    private String description;
+    private final String description;
 
     public SectionItem(int id, @DrawableRes int icon, @NonNull String text,
                        @NonNull String description) {
