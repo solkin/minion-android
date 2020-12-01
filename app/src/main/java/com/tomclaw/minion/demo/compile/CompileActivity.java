@@ -131,29 +131,28 @@ public class CompileActivity extends AppCompatActivity implements GroupListener,
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
+        int itemId = item.getItemId();
+        if (itemId == android.R.id.home) {
+            finish();
+            return true;
+        } else if (itemId == R.id.insert) {
+            minion.getOrCreateGroup(generateRandomString());
+            adapter.setData(minion);
+            adapter.notifyDataSetChanged();
+            return true;
+        } else if (itemId == R.id.compile) {
+            minion.store();
+            try {
+                String string = new String(StreamHelper.readFully(storage), StringUtil.UTF_8);
+                Intent intent = new Intent(CompileActivity.this, ParseActivity.class)
+                        .putExtra(ParseActivity.EXTRA_INI_STRUCTURE, string);
+                startActivity(intent);
                 finish();
-                return true;
-            case R.id.insert:
-                minion.getOrCreateGroup(generateRandomString());
-                adapter.setData(minion);
-                adapter.notifyDataSetChanged();
-                return true;
-            case R.id.compile:
-                minion.store();
-                try {
-                    String string = new String(StreamHelper.readFully(storage), StringUtil.UTF_8);
-                    Intent intent = new Intent(CompileActivity.this, ParseActivity.class)
-                            .putExtra(ParseActivity.EXTRA_INI_STRUCTURE, string);
-                    startActivity(intent);
-                    finish();
-                } catch (IOException ignored) {
-                }
-                return true;
-            default:
-                return false;
+            } catch (IOException ignored) {
+            }
+            return true;
         }
+        return false;
     }
 
     @Override
