@@ -9,10 +9,10 @@ import androidx.annotation.StringRes;
 @SuppressWarnings("WeakerAccess")
 public class BenchmarkItem {
 
-    private int id;
+    private final int id;
 
     @StringRes
-    private int title;
+    private final int title;
 
     private int progress;
     private String result;
