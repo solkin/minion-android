@@ -12,7 +12,7 @@ import android.os.Looper;
 @SuppressWarnings("WeakerAccess")
 public class MainExecutor {
 
-    private static Handler mainHandler = new Handler(Looper.getMainLooper());
+    private static final Handler mainHandler = new Handler(Looper.getMainLooper());
 
     public static boolean isMainThread() {
         return mainHandler.getLooper().getThread() == Thread.currentThread();

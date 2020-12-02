@@ -12,7 +12,7 @@ import java.util.Random;
 public class StringUtil {
 
     public static final Charset UTF_8 = Charset.forName("UTF-8");
-    private static Random random;
+    private static final Random random;
 
     static {
         random = new Random(System.currentTimeMillis());
