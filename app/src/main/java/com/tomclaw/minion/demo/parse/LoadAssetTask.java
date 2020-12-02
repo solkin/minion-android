@@ -16,9 +16,8 @@ import java.io.InputStreamReader;
  */
 class LoadAssetTask extends WeakObjectTask<EditText> {
 
-    private final
     @NonNull
-    StringBuilder total;
+    private final StringBuilder total;
 
     LoadAssetTask(EditText object) {
         super(object);
