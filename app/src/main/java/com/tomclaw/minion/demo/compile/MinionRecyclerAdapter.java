@@ -28,9 +28,9 @@ public class MinionRecyclerAdapter extends RecyclerView.Adapter<MinionViewHolder
     private static final int TYPE_RECORD = 0x02;
 
     @NonNull
-    private List<MinionItem> items;
+    private final List<MinionItem> items;
 
-    private LayoutInflater layoutInflater;
+    private final LayoutInflater layoutInflater;
 
     @Nullable
     private GroupListener groupListener;
