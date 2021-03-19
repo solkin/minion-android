@@ -7,7 +7,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 30
         versionCode 1
-        versionName "1.0"
+        versionName "1.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -30,29 +30,3 @@ dependencies {
     testImplementation 'junit:junit:4.13.1'
 }
 
-ext {
-    bintrayRepo = 'minion'
-    bintrayName = 'minion-android'
-
-    publishedGroupId = 'com.tomclaw.minion'
-    libraryName = 'minion'
-    artifact = 'minion'
-
-    libraryDescription = 'Minion is a handy group-key-value data storage library, powered by INI format'
-
-    siteUrl = 'https://github.com/solkin/minion-android'
-    gitUrl = 'https://github.com/solkin/minion-android.git'
-
-    libraryVersion = '1.1.2'
-
-    developerId = 'solkin'
-    developerName = 'Igor Solkin'
-    developerEmail = 'inbox@tomclaw.com'
-
-    licenseName = 'The Apache Software License, Version 2.0'
-    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-    allLicenses = ["Apache-2.0"]
-}
-
-apply from: '../install.gradle'
-apply from: '../bintray.gradle'

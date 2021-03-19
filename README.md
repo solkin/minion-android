@@ -1,13 +1,23 @@
 # Minion for Android
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Minion-green.svg?style=flat)](https://android-arsenal.com/details/1/6214) [![Build Status](https://travis-ci.org/solkin/minion-android.svg?branch=master)](https://travis-ci.org/solkin/minion-android) [![Download](https://api.bintray.com/packages/solkin/minion/minion-android/images/download.svg) ](https://bintray.com/solkin/minion/minion-android/_latestVersion) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/74c7e0e1018b470eb11b01600e570474)](https://www.codacy.com/app/solkin/minion-android?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=solkin/minion-android&amp;utm_campaign=Badge_Grade)
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Minion-green.svg?style=flat)](https://android-arsenal.com/details/1/6214) [![Build Status](https://travis-ci.org/solkin/minion-android.svg?branch=master)](https://travis-ci.org/solkin/minion-android) [![](https://jitpack.io/v/solkin/minion-android.svg)](https://jitpack.io/#solkin/minion-android) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/74c7e0e1018b470eb11b01600e570474)](https://www.codacy.com/app/solkin/minion-android?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=solkin/minion-android&amp;utm_campaign=Badge_Grade)
 
 Minion is a handy group-key-value data storage library, powered by INI format. Let you parse and store INI format. Designed with modern fluent interface.
 
 ![Minion icon](/minion_icon.png)
 
 ### Add dependency
+**Step 1.** Add the JitPack repository to your build file
 ```groovy
-implementation 'com.tomclaw.minion:minion:1.1.0'
+allprojects {
+	repositories {
+		...
+		maven { url 'https://jitpack.io' }
+	}
+}
+```
+**Step 2.** Add the dependency
+```groovy
+implementation 'com.github.solkin:minion-android:1.2'
 ```
 
 ### Create async Minion for file

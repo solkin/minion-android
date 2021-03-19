@@ -39,7 +39,7 @@ public class Minion {
     private static final String KEY_VALUE_DIVIDER = "=";
     private static final String ARRAY_VALUE_DELIMITER = ",";
 
-    private static Executor executor = Executors.newSingleThreadExecutor();
+    private static final Executor executor = Executors.newSingleThreadExecutor();
 
     private final Readable readable;
     private final Writable writable;
