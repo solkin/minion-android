@@ -1,4 +1,7 @@
-apply plugin: 'com.android.library'
+plugins {
+    id 'com.android.library'
+    id 'maven-publish'
+}
 
 android {
     compileSdkVersion 30
@@ -28,3 +31,16 @@ dependencies {
     testImplementation 'junit:junit:4.13.1'
 }
 
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+
+                groupId = 'com.tomclaw.minion'
+                artifactId = 'minion'
+                version = '1.3'
+            }
+        }
+    }
+}

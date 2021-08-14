@@ -17,7 +17,7 @@ allprojects {
 ```
 **Step 2.** Add the dependency
 ```groovy
-implementation 'com.github.solkin:minion-android:1.2'
+implementation 'com.github.solkin:minion-android:1.3'
 ```
 
 ### Create async Minion for file
