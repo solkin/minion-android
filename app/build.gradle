@@ -9,12 +9,12 @@ android {
             if (project.hasProperty("keyPassword")) keyPassword project.keyPassword
         }
     }
-    compileSdkVersion 33
+    compileSdkVersion 36
 
     defaultConfig {
         applicationId "com.tomclaw.minion.demo"
         minSdkVersion 15
-        targetSdkVersion 33
+        targetSdkVersion 36
         versionCode project.hasProperty("versionCode") ? Integer.parseInt(project.versionCode) : 1
         versionName "1.3"
     }
